@@ -15,6 +15,9 @@ export class ReadChapterDto {
   @ApiProperty({ example: 'string', description: 'videoUrl of the Chapter', required: false })
   videoUrl?: string;
 
+  @ApiProperty({ example: 'string', description: 'videoTime of the Chapter', required: false })
+  videoTime?: string;
+
   @ApiProperty({ example: 'number', description: 'position of the Chapter' })
   position!: number;
 

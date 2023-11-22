@@ -63,7 +63,7 @@ const NavbarMenuItemsMobile = ({
                 />
               )}
             </div>
-            {item.childrens?.map(
+            {item.children?.map(
               (itemInside, indexInside) =>
                 navbarToggle && (
                   <AccordionContent

@@ -18,6 +18,11 @@ export class ChaptersService {
     return this.prisma.chapter.findMany();
   }
 
+  async findAllLength(): Promise<number> {
+    const chapters = await this.prisma.chapter.findMany();
+    return chapters.length;
+  }
+
   async findOne(id: string): Promise<Chapter | null> {
     return this.prisma.chapter.findUnique({
       where: { id },
@@ -36,8 +41,33 @@ export class ChaptersService {
   }
 
   async remove(id: string): Promise<Chapter> {
-    return this.prisma.chapter.delete({
+    // Silinecek chapter'ın pozisyonunu al
+    const deletedChapter = await this.prisma.chapter.findUnique({
       where: { id },
     });
+
+    if (!deletedChapter) {
+      throw new Error('Chapter not found');
+    }
+
+    // Chapter'ı sil
+    await this.prisma.chapter.delete({
+      where: { id },
+    });
+
+    // Silinen chapter'ın pozisyonundan sonraki tüm chapter'ların pozisyonunu güncelle
+    await this.prisma.chapter.updateMany({
+      where: {
+        position: { gt: deletedChapter.position },
+        courseId: deletedChapter.courseId,
+      },
+      data: {
+        position: { increment: -1 },
+      },
+    });
+
+    return deletedChapter;
   }
+
+  
 }

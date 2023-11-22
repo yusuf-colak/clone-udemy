@@ -18,6 +18,8 @@ import { ChaptersController } from '../modules/chapters/controllers/chapters.con
 import { ChaptersService } from '../modules/chapters/services/chapters.service';
 import { AttachmentsController } from '../modules/attachments/controllers/attachments.controller';
 import { AttachmentsService } from '../modules/attachments/services/attachments.service';
+import { TrackingsController } from '../modules/trackings/controllers/trackings.controller';
+import { TrackingsService } from '../modules/trackings/services/trackings.service';
 
 @Module({
   controllers: [
@@ -30,6 +32,7 @@ import { AttachmentsService } from '../modules/attachments/services/attachments.
     CategoriesController,
     ChaptersController,
     AttachmentsController,
+    TrackingsController,
   ],
   providers: [
     PrismaService,
@@ -42,6 +45,7 @@ import { AttachmentsService } from '../modules/attachments/services/attachments.
     CategoriesService,
     ChaptersService,
     AttachmentsService,
+    TrackingsService,
   ],
   exports: [],
 })

@@ -15,7 +15,12 @@ export class CoursesService {
   }
 
   async findAll(): Promise<Course[]> {
-    return this.prisma.course.findMany();
+    return this.prisma.course.findMany({
+      include: {
+        chapters: true,
+        attachments: true,
+      },
+    });
   }
 
   async findOne(id: string): Promise<Course | null> {

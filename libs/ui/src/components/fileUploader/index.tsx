@@ -9,15 +9,16 @@ import UploadList from '@/libs/ui/components/fileUploader/list';
 
 interface FileUploaderProps {
   tenant: string;
+  folder?: string | null;
   multiple?: boolean;
   onFinish?: (results: any[] | null) => void; // Add this line
 }
 
 export default function FileUploader({
   tenant,
+  folder = null,
   multiple = false,
   onFinish,
-  video,
 }: FileUploaderProps) {
   const [files, setFiles] = useState<any>([]);
   const [progress, setProgress] = useState<number[]>([]);
@@ -51,7 +52,7 @@ export default function FileUploader({
       setUploads(Array(files.length).fill(null));
       setCanceled(Array(files.length).fill(false));
 
-      startUpload(tenant, files, setUploads, setProgress)
+      startUpload(tenant, folder, files, setUploads, setProgress)
         .then((results) => {
           if (onFinish) {
             onFinish(results ?? null);

@@ -13,7 +13,7 @@ const TeacherMode = () => {
   return (
     <React.Fragment>
       {isTeacherPage || isPlayerPage ? (
-        <Link href="/" className="flex flex-row">
+        <Link href="/courses" className="flex flex-row">
           <LogOut className="h-4 w-4 mr-2" /> Exit
         </Link>
       ) : (

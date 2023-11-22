@@ -10,6 +10,7 @@ interface SidebarItemProps {
   navbarToggle: boolean;
   controlText: any;
   controlItem: any;
+  active: boolean;
 }
 
 const AcordionItems = ({
@@ -35,9 +36,10 @@ const AcordionItems = ({
       active={active}
       locked={item.locked}
       className={cn(
-        'before:absolute',
+        'before:absolute ',
         currentActive &&
-          'relative before:z-0 before:rounded-xl before:w-full before:h-[75%] before:bg-primary'
+          'relative before:z-0 before:rounded-xl before:w-full before:h-[75%] before:bg-primary',
+          
       )}
     >
       <motion.div

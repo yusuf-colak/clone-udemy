@@ -71,6 +71,9 @@ model User {
   roles       RolesOnUsers[]
   permissions PermissionsOnUsers[]
 
+  tracking Tracking[]
+
+
   tenant   Tenant? @relation(fields: [tenantId], references: [id])
   tenantId String?
 
@@ -99,6 +102,7 @@ model Tenant {
 
   users   User[]
   domains Domain[]
+  //courses Course[]
 
   @@map("tenants")
 }
@@ -132,12 +136,17 @@ model Course {
 
   chapters Chapter[]
   attachments Attachment[]
+  tracking Tracking[]
 
+//tenantId String
+ // tenant   Tenant @relation(fields: [tenantId], references: [id])
+ 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  
 
-  @@index([categoryId])
-      @@map("course")
+  @@map("course")
 
 }
 
@@ -170,12 +179,14 @@ model Chapter {
   title String
   description String? @db.Text
   videoUrl String? @db.Text
+  videoTime String? @db.Text
   position Int
   isPublished Boolean? @default(false)
 
   courseId String
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
+tracking Tracking[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -183,6 +194,19 @@ model Chapter {
     @@map("chapter")
 
 }
+model Tracking {
+  id          String   @id @default(uuid())
+  isCompleted Boolean? @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
-//düzenleme ! 
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("tracking")
+}

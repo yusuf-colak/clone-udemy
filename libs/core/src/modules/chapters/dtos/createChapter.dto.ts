@@ -16,6 +16,11 @@ export class CreateChapterDto {
   @IsOptional()
   videoUrl?: string;
 
+  @ApiProperty({ example: 'string', description: 'videoTime' })
+  @IsNotEmpty()
+  @IsOptional()
+  videoTime?: string;
+
   @ApiProperty({ example: 'number', description: 'position' })
   @IsNotEmpty()
   position!: number;
@@ -25,10 +30,10 @@ export class CreateChapterDto {
   @IsOptional()
   isPublished?: boolean;
 
-  @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000', description: 'courseId' })
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'courseId',
+  })
   @IsNotEmpty()
   courseId!: string;
-
-
-
 }

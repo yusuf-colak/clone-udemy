@@ -63,6 +63,24 @@ export class ChaptersController {
   findAll() {
     return this.chaptersService.findAll();
   }
+
+  @ApiOperation({ summary: 'Chapters Length' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadChapterDto,
+    isArray: true,
+  })
+  @ApiException(() => UnauthorizedException, {
+    description: 'Not authorized to view the chapters',
+  })
+  @checkAbilites({ action: 'manage', subject: 'Chapter' })
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @Get('lenght')
+  findAllLength() {
+    return this.chaptersService.findAllLength();
+  }
+
   @ApiOperation({ summary: 'List all chapters for a specific course' })
   @ApiResponse({
     status: 200,
