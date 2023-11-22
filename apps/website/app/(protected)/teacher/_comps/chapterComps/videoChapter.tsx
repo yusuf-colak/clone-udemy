@@ -64,11 +64,14 @@ export const VideoChapterEdit = ({ chapter, setChapters }: ImageFormProps) => {
           },
         }
       );
-      setChapters((current) => {
-        const index = current.findIndex((c) => c.id === chapter.id);
-        const newChapters = [...current];
-        newChapters[index] = { ...current[index], ...fileNames[0] };
-        return newChapters;
+      setChapters((chapters: any) => {
+        const index = chapters.findIndex((item: any) => item.id === chapter.id);
+        const updatedChapters = [...chapters];
+        updatedChapters[index] = {
+          ...updatedChapters[index],
+          videoUrl: fileNames[0].fileName,
+        };
+        return updatedChapters;
       });
       toast.success('Course updated');
       toggleEdit();

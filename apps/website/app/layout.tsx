@@ -1,5 +1,5 @@
 import '@/libs/ui/globals.css';
-import { Toaster } from '@/libs/ui/components/toaster';
+import { Toaster } from '@/libs/ui/components/ui/toast';
 
 export const metadata = {
   title: 'Dashboard',

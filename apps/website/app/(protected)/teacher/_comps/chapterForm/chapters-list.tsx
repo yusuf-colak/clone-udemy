@@ -9,11 +9,21 @@ import {
   DropResult,
 } from '@hello-pangea/dnd';
 import { Delete, Edit, Grip, Pencil } from 'lucide-react';
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/libs/ui/components/ui/accordion';
 import { Badge } from '@/libs/ui/components/ui/badge';
 import { cn } from '@/libs/ui/utils';
 import ChapterEdit from '../chapterComps/chapterEdit';
 import ChapterDelete from '../chapterComps/chapterDelete';
+import ChapterEditV2 from '../chapterComps/chapterEditV2';
+import TitleChapterEdit from '../chapterComps/titleEdit';
+import DescriptionChapterEdit from '../chapterComps/descriptionedit';
+import { VideoChapterEdit } from '../chapterComps/videoChapter';
+import { Button } from '@/libs/ui/components/ui/button';
 
 interface ChaptersListProps {
   chapters: Chapter[];
@@ -74,37 +84,46 @@ export const ChaptersList = ({
                 index={index}
               >
                 {(provided) => (
-                  <div
-                    className={cn(
-                      'flex items-center text-md chapters-center gap-x-2 bg-slate-200 border-slate-200 border text-slate-700 rounded-md mb-4 ',
-                      chapter.isPublished &&
-                        'bg-sky-100 border-sky-200 text-sky-700'
-                    )}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                  >
-                    <div
-                      className={cn(
-                        'px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition',
-                        chapter.isPublished &&
-                          'border-r-sky-200 hover:bg-sky-200'
-                      )}
-                      {...provided.dragHandleProps}
-                    >
-                      <Grip className="h-5 w-5" />
-                    </div>
-                    {chapter.title}
-                    <div className="ml-auto  flex chapters-center ">
-                      <ChapterEdit
-                        chapter={chapter}
-                        setChapters={setChapters}
-                      />
-                      <ChapterDelete
-                        chapter={chapter}
-                        setChapters={setChapters}
-                      />
-                    </div>
-                  </div>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value={`item-${index}`}>
+                      <div
+                        className={cn(
+                          ' grid grid-cols-2  items-center text-md chapters-center   bg-slate-200 border-slate-200 border text-slate-700 rounded-md mb-4 ',
+                          chapter.isPublished &&
+                            'bg-sky-100 border-sky-200 text-sky-700'
+                        )}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                      >
+                        <div
+                          className={cn(
+                            'flex flex-row  gap-x-2  px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition',
+                            chapter.isPublished &&
+                              'border-r-sky-200 hover:bg-sky-200'
+                          )}
+                          {...provided.dragHandleProps}
+                        >
+                          <Grip className="h-5 w-5" /> {chapter.title}
+                        </div>
+                        <div className="ml-auto  flex items-center chapters-center ">
+                          <ChapterDelete
+                            chapter={chapter}
+                            setChapters={setChapters}
+                          />
+
+                          <AccordionTrigger className="py-0 pr-1">
+                            <Button variant="ghost">
+                              <Edit />
+                            </Button>
+                          </AccordionTrigger>
+                        </div>
+                        <ChapterEditV2
+                          chapter={chapter}
+                          setChapters={setChapters}
+                        />
+                      </div>
+                    </AccordionItem>
+                  </Accordion>
                 )}
               </Draggable>
             ))}

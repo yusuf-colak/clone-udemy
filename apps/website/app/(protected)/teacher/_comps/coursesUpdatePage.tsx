@@ -59,14 +59,13 @@ const CoursesUpdatePage = ({ params }) => {
       courseData?.categoryId,
     ];
 
-
     setCompletedFields(requiredFields.filter(Boolean).length);
   }, [courseData]);
 
   return (
     <React.Fragment>
       {courseData && (
-        <main className="p-6">
+        <main className="lg:p-6 p-2">
           <div className="flex  items-center justify-between">
             <div className="flex flex-col gap-y-2">
               <h1 className="text-2xl font-medium">Kurs kurulumu</h1>

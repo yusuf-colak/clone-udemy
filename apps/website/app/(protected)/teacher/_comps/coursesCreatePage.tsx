@@ -69,21 +69,16 @@ const CreateCoursesPage = () => {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name your course</FormLabel>
+                <FormLabel>Kursunuza ad verin</FormLabel>
                 <FormDescription>
-                  What would you like to name your course? Don&apos;t worry, you
-                  can change this laster.
+                  Kursunuza ne ad vermek istersiniz? Endişelenmeyin , kurs
+                  bağlığını daha sonra değiştirebilirsiniz.
                 </FormDescription>
-                <FormLabel>Course title</FormLabel>
+                <FormLabel>Kurs başlığı</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="e.g. 'Advanced web development'"
-                    {...field}
-                  />
+                  <Input placeholder="Kurs başlığı girin" {...field} />
                 </FormControl>
-                <FormDescription>
-                  What will you teach in this course?
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -91,11 +86,11 @@ const CreateCoursesPage = () => {
           <div className="flex items-center gap-x-2">
             <Link href="/">
               <Button type="button" variant="ghost">
-                Cancel
+                İptal
               </Button>
             </Link>
             <Button type="submit" disabled={!isValid || isSubmitting}>
-              Contiune
+              Devam et
             </Button>
           </div>
         </form>

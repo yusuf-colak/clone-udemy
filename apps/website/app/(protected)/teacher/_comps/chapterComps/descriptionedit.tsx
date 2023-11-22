@@ -77,7 +77,7 @@ const DescriptionChapterEdit = ({
             <>İptal</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
+              <Pencil className="h-4 w-4 mr-2 " />
               Açıklamayı Düzenle
             </>
           )}
