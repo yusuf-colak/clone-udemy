@@ -96,7 +96,7 @@ export default function Sidebar() {
     {
       title: 'Kurslar',
       icon: List,
-      href: '/teacher/courses',
+      href: '/teacher/coursesTable',
     },
     {
       title: 'Yeni Kurs Ekle',

@@ -54,9 +54,9 @@ const CreateCoursesPage = () => {
         }
       );
       router.push(`/teacher/addCourse/${response.data.id}`);
-      toast.success('Course created');
+      toast.success('Kursunuz başarıyla oluşturuldu');
     } catch (error) {
-      toast.error('Somting went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
 

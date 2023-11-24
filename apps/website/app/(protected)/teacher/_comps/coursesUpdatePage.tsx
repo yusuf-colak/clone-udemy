@@ -13,6 +13,7 @@ import { ImageForm } from '../_comps/imageComps/image-form';
 import { AttachmentForm } from '../_comps/attachmentComps/attachmentFrom';
 import PublishSwitch from '../_comps/publishSwitchComps/publishSwitch';
 import { ChaptersForm } from './chapterForm/chapters-form';
+import { toast } from 'react-hot-toast';
 const CoursesUpdatePage = ({ params }) => {
   const [courseData, setCourseData] = useState<any | null>();
   const [categories, setCategories] = useState<any | null>();

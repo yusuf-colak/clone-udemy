@@ -73,11 +73,11 @@ export const VideoChapterEdit = ({ chapter, setChapters }: ImageFormProps) => {
         };
         return updatedChapters;
       });
-      toast.success('Course updated');
+      toast.success('Video başarıyla yüklendi...');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
 

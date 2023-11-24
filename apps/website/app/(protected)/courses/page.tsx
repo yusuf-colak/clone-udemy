@@ -10,7 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/libs/ui/components/ui/card';
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/libs/ui/components/ui/tooltip';
 import Link from 'next/link';
 import { getFileS3Url } from '@/s3';
 import { CheckCircle, Image } from 'lucide-react';
@@ -78,7 +83,7 @@ const CoursesPage = () => {
       <div className="flex gap-5 flex-wrap justify-center">
         {courses.map((course: any) =>
           course.isPublished ? (
-            <Card key={course.id} className="max-w-[400px] min-w-[200px]">
+            <Card key={course.id} className="w-[400px] min-w-[250px]">
               <Link
                 className="hover:cursor-pointer"
                 href={`/courses/${course.id}`}
@@ -129,7 +134,19 @@ const CoursesPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <span className="text-2xl"> {course.title}</span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <h1 className="w-[330px] truncate ... text-2xl">
+                          {course.title}
+                        </h1>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p> {course.title}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
                   <CardDescription className="text-xs">
                     {course.description}
                   </CardDescription>

@@ -4,6 +4,7 @@ import { cn } from '@/libs/ui/utils';
 import { useAuth } from 'apps/website/hooks/useAuth';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const PublishSwitch = ({
   courseData,
@@ -36,6 +37,7 @@ const PublishSwitch = ({
         ...current,
         isPublished: updatedIsPublished,
       }));
+      toast.success('Kurs paylaşım durumu güncellendi');
     } catch {
       console.error('Error updating course data');
     }

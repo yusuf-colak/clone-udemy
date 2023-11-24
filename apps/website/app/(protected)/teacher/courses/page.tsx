@@ -10,7 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/libs/ui/components/ui/card';
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/libs/ui/components/ui/tooltip';
 import Link from 'next/link';
 import { getFileS3Url } from '@/s3';
 import { Edit, Image } from 'lucide-react';
@@ -77,7 +82,18 @@ const CoursesEditPage = () => {
                   className="hover:cursor-pointer"
                   href={`/courses/${course.id}`}
                 >
-                  <h1> {course.title}</h1>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <h1 className="max-w-[200px] truncate ...">
+                          {course.title}
+                        </h1>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p> {course.title}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </Link>
                 <div>
                   <Button

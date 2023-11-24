@@ -113,7 +113,9 @@ const ChapterPage = ({
 
   return (
     <div className="w-full p-5">
-      <h2 className="text-2xl font-semibold text-gray-700">{chapter?.title}</h2>
+      <h2 className="lg:text-2xl text-xl font-semibold text-gray-700">
+        {chapter?.title}
+      </h2>
 
       {chapter?.videoUrl ? (
         <>

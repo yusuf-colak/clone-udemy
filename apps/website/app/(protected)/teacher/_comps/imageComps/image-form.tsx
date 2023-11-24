@@ -40,7 +40,6 @@ export const ImageForm = ({
   const router = useRouter();
 
   const handleFileUploadFinish = async (fileNames: any) => {
-   
     setPreviewCover(fileNames[0].url);
     setIsEditing(true);
     try {
@@ -56,11 +55,11 @@ export const ImageForm = ({
         }
       );
       setCourseData((current) => ({ ...current, ...response.data }));
-      toast.success('Course updated');
+      toast.success('Resim başarıyla güncellendi');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Resim güncellenirken bir hata oluştu');
     }
   };
 
@@ -108,7 +107,11 @@ export const ImageForm = ({
         ))}
       {isEditing && (
         <div>
-          <FileUploader tenant="test" folder="image" onFinish={handleFileUploadFinish} />
+          <FileUploader
+            tenant="test"
+            folder="image"
+            onFinish={handleFileUploadFinish}
+          />
         </div>
       )}
     </div>

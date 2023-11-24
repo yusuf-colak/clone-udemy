@@ -109,11 +109,11 @@ export const ChaptersForm = ({
         (a, b) => a.position - b.position
       );
       setChapters(sortedChapters);
-      toast.success('Chapter created');
+      toast.success('Video başarıyla oluşturuldu. Lütfen düzenleme yapın...');
       toggleCreating();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
 
@@ -138,10 +138,10 @@ export const ChaptersForm = ({
         })
       );
       form.reset();
-      toast.success('Chapters reordered');
+      toast.success('Sıralama başarıyla güncellendi');
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     } finally {
       setIsUpdating(false);
     }

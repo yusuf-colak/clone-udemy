@@ -14,10 +14,16 @@ const TeacherMode = () => {
     <React.Fragment>
       {isTeacherPage || isPlayerPage ? (
         <Link href="/courses" className="flex flex-row">
-          <LogOut className="h-4 w-4 mr-2" /> Exit
+          <Button className="w-full border" variant="ghost" size="sm">
+            <LogOut className="h-4 w-4 mr-2" /> Öğretmen Modundan Çık
+          </Button>
         </Link>
       ) : (
-        <Link href="/teacher/courses">Teacher Mode</Link>
+        <Link href="/teacher/courses">
+          <Button className="w-full border" variant="ghost" size="sm">
+            Öğretmen Paneli
+          </Button>
+        </Link>
       )}
     </React.Fragment>
   );
@@ -26,22 +32,18 @@ const TeacherMode = () => {
 const DesktopTeacherMode = () => {
   return (
     <React.Fragment>
-      <Button variant="ghost" size="sm">
-        <TeacherMode />
-      </Button>
+      <TeacherMode />
     </React.Fragment>
   );
 };
 
 const MobileTeacherMode = () => {
   return (
-    <React.Fragment>
-      <Button variant="ghost" size="sm">
-        <SheetClose className="w-full" asChild>
-          <TeacherMode />
-        </SheetClose>
-      </Button>
-    </React.Fragment>
+    <div>
+      <SheetClose asChild>
+        <TeacherMode />
+      </SheetClose>
+    </div>
   );
 };
 

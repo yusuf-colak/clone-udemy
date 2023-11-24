@@ -64,10 +64,10 @@ export const DescriptionForm = ({
       );
       setCourseData((current) => ({ ...current, ...values }));
 
-      toast.success('Course updated');
+      toast.success('Kurs açıklaması başarıyla güncellendi...');
       toggleEdit();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
 

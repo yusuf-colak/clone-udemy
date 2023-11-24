@@ -24,18 +24,34 @@ export class TrackingsService {
     });
   }
 
-  async findCourseIdAnduserId(userId: string,courseId:string): Promise<Tracking[]> {
+  async findCourseIdAnduserId(
+    userId: string,
+    courseId: string
+  ): Promise<Tracking[]> {
     return this.prisma.tracking.findMany({
       where: { userId, courseId },
     });
   }
 
+  // async countAllByUserId(userId: string): Promise<number> {
+  //   const trackings = await this.prisma.tracking.findMany({
+  //     where: { userId },
+  //   });
+  //   return trackings.length;
+  // }
+
   async countAllByUserId(userId: string): Promise<number> {
     const trackings = await this.prisma.tracking.findMany({
-      where: { userId },
+      where: {
+        userId,
+        course: {
+          isPublished: true,
+        },
+      },
     });
     return trackings.length;
   }
+
   async countCourseIds(
     userId: string
   ): Promise<{ courseId: string; count: number }[]> {

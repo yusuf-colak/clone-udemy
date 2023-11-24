@@ -46,9 +46,9 @@ const CoursesVideoPage = ({ params }: { params: { coursesId: string } }) => {
   return (
     <div className="w-full flex flex-col lg:flex-row">
       <div className="w-full">
-        <h1 className="text-4xl font-semibold text-gray-800">
+        <p className=" lg:text-4xl text-2xl font-semibold text-gray-800">
           {courses.title}
-        </h1>
+        </p>
         <ChapterPage
           setPreviewCover={setPreviewCover}
           courses={courses}

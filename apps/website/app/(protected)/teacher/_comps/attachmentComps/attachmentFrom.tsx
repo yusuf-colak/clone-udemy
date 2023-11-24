@@ -83,11 +83,11 @@ export const AttachmentForm = ({
         }));
       } catch (error) {
         console.error('Error uploading file:', error);
-        toast.error('Something went wrong');
+        toast.error('Dosya yüklenirken bir hata oluştu');
       }
     }
 
-    toast.success('All files uploaded successfully');
+    toast.success('Dosya başarıyla yüklendi');
     toggleEdit();
     router.refresh();
   };
@@ -125,15 +125,14 @@ export const AttachmentForm = ({
         ),
       }));
       setFileNamesEdit(null);
-      toast.success('Course updated');
+      toast.success('Başarıyla güncellendi');
       toggleEdit();
       setIsEditing(false);
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
   const handleDownload = (attachment) => {
-
     if (attachment.url) {
       getFileS3Url(attachment.url).then((url) => {
         const downloadLink = url;

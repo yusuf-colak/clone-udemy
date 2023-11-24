@@ -40,9 +40,9 @@ const ChapterDelete = ({ chapter, setChapters }) => {
         return updatedChapters;
       });
 
-      toast.success('Course updated');
+      toast.success('Başarıyla silindi');
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
 

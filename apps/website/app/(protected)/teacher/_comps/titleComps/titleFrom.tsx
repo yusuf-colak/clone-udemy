@@ -56,10 +56,10 @@ const TitleFrom = ({ courseData, courseId, setCourseData }: TitleFromProps) => {
       );
       setCourseData((current) => ({ ...current, ...values }));
 
-      toast.success('Course updated');
+      toast.success('Kurs başlığı güncellendi...');
       toggleEdit();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Bir hata oluştu');
     }
   };
 
