@@ -107,7 +107,7 @@ const CoursesPage = () => {
                     <>
                       {course.imageUrl ? (
                         <img
-                          className="h-[100px] w-[300px] object-contain"
+                          className="h-[100px] w-full object-none flex justify-center items-center border-0 rounded-xl"
                           src={course.imageUrl}
                           alt="course"
                         />

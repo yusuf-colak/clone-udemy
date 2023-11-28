@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import {Tenant} from '@prisma/client'
+import { Tenant } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '@/core/prisma';
-import { CreateTenantDto } from "@/core/modules/tenants/dtos/createTenant.dto";
-
+import { CreateTenantDto } from '@/core/modules/tenants/dtos/createTenant.dto';
 
 @Injectable()
 export class TenantsService {
-
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateTenantDto): Promise<any> {
@@ -24,8 +22,8 @@ export class TenantsService {
   async findOne(id: string): Promise<Tenant | null> {
     return this.prisma.tenant.findUnique({
       where: {
-        id
-      }
+        id,
+      },
     });
   }
 

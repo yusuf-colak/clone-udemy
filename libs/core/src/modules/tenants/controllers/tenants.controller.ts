@@ -1,5 +1,4 @@
-
-import { ReadTenantDto} from '../dtos/readTenant.dto';
+import { ReadTenantDto } from '../dtos/readTenant.dto';
 import {
   Controller,
   Get,
@@ -15,13 +14,19 @@ import {
   Version,
 } from '@nestjs/common';
 import { TenantsService } from '../services/tenants.service';
-import { ApiTags,ApiBearerAuth, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/core/auth/jwt-auth.guard';
 import { ApiException } from '@nanogiants/nestjs-swagger-api-exception-decorator';
-import {CreateTenantDto} from "@/core/modules/tenants/dtos/createTenant.dto";
-import {UpdateTenantDto} from "@/core/modules/tenants/dtos/updateTenant.dto";
-import {checkAbilites} from "@/core/abilities/abilities.decorator";
-import {AbilitiesGuard} from "@/core/abilities/abilities.guard";
+import { CreateTenantDto } from '@/core/modules/tenants/dtos/createTenant.dto';
+import { UpdateTenantDto } from '@/core/modules/tenants/dtos/updateTenant.dto';
+import { checkAbilites } from '@/core/abilities/abilities.decorator';
+import { AbilitiesGuard } from '@/core/abilities/abilities.guard';
 
 @ApiTags('Tenants')
 @ApiBearerAuth()
@@ -30,7 +35,10 @@ export class TenantsController {
   constructor(private readonly TenantsService: TenantsService) {}
 
   @ApiOperation({ summary: 'Create a new tenant' })
-  @ApiResponse({ status: 201, description: 'The tenant has been created successfully.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The tenant has been created successfully.',
+  })
   @ApiBody({ type: CreateTenantDto })
   @checkAbilites({ action: 'create', subject: 'Tenant' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
@@ -39,10 +47,16 @@ export class TenantsController {
     return this.TenantsService.create(tenantData);
   }
 
-
   @ApiOperation({ summary: 'List all tenant' })
-  @ApiResponse({ status: 200, description: 'Successful.', type: ReadTenantDto, isArray: true})
-  @ApiException(() => UnauthorizedException, { description: 'The tenant is not authorized' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadTenantDto,
+    isArray: true,
+  })
+  @ApiException(() => UnauthorizedException, {
+    description: 'The tenant is not authorized',
+  })
   @checkAbilites({ action: 'manage', subject: 'Tenant' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Get()
@@ -51,8 +65,10 @@ export class TenantsController {
   }
 
   @ApiOperation({ summary: 'Fetch a specific tenant' })
-  @ApiResponse({ status: 200, description: 'Successful.', type: ReadTenantDto})
-  @ApiException(() => NotFoundException, { description: 'The tenant was not found' })
+  @ApiResponse({ status: 200, description: 'Successful.', type: ReadTenantDto })
+  @ApiException(() => NotFoundException, {
+    description: 'The tenant was not found',
+  })
   @checkAbilites({ action: 'read', subject: 'Tenant' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Get(':id')
@@ -65,8 +81,13 @@ export class TenantsController {
   }
 
   @ApiOperation({ summary: 'Update information for a specific tenant' })
-  @ApiResponse({ status: 200, description: 'tenant information has been updated successfully.' })
-  @ApiException(() => NotFoundException, { description: 'The tenant was not found' })
+  @ApiResponse({
+    status: 200,
+    description: 'tenant information has been updated successfully.',
+  })
+  @ApiException(() => NotFoundException, {
+    description: 'The tenant was not found',
+  })
   @ApiBody({ type: ReadTenantDto })
   @checkAbilites({ action: 'update', subject: 'Tenant' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
@@ -76,8 +97,13 @@ export class TenantsController {
   }
 
   @ApiOperation({ summary: 'Delete a specific tenant' })
-  @ApiException(() => NotFoundException, { description: 'The tenant was not found' })
-  @ApiResponse({ status: 200, description: 'The tenant has been deleted successfully.' })
+  @ApiException(() => NotFoundException, {
+    description: 'The tenant was not found',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The tenant has been deleted successfully.',
+  })
   @checkAbilites({ action: 'delete', subject: 'Tenant' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Delete(':id')
@@ -85,4 +111,3 @@ export class TenantsController {
     await this.TenantsService.remove(id);
   }
 }
-

@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import {Role} from '@prisma/client'
+import { Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '@/core/prisma';
-import {CreateRoleDto} from "@/modules/roles/dtos/createRole.dto";
-
+import { CreateRoleDto } from '@/modules/roles/dtos/createRole.dto';
 
 @Injectable()
 export class RolesService {
-
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateRoleDto): Promise<any> {
@@ -20,16 +18,16 @@ export class RolesService {
   findAll(): Promise<Role[]> {
     return this.prisma.role.findMany({
       include: {
-        permissions: true
-      }
+        permissions: true,
+      },
     });
   }
-
+ 
   async findOne(id: string): Promise<Role | null> {
     return this.prisma.role.findUnique({
       where: {
-        id
-      }
+        id,
+      },
     });
   }
 

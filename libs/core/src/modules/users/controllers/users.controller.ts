@@ -1,5 +1,4 @@
-
-import { ReadUserDto} from '../dtos/readUser.dto';
+import { ReadUserDto } from '../dtos/readUser.dto';
 import {
   Controller,
   Get,
@@ -15,13 +14,19 @@ import {
   Version,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
-import { ApiTags,ApiBearerAuth, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/core/auth/jwt-auth.guard';
 import { ApiException } from '@nanogiants/nestjs-swagger-api-exception-decorator';
-import {CreateUserDto} from "@/modules/users/dtos/createUser.dto";
-import {AbilitiesGuard} from "@/core/abilities/abilities.guard";
-import {checkAbilites} from "@/core/abilities/abilities.decorator";
-import {UpdateUserDto} from "@/modules/users/dtos/updateUser.dto";
+import { CreateUserDto } from '@/modules/users/dtos/createUser.dto';
+import { AbilitiesGuard } from '@/core/abilities/abilities.guard';
+import { checkAbilites } from '@/core/abilities/abilities.decorator';
+import { UpdateUserDto } from '@/modules/users/dtos/updateUser.dto';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -30,7 +35,10 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @ApiOperation({ summary: 'Create a new user' })
-  @ApiResponse({ status: 201, description: 'The user has been created successfully.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been created successfully.',
+  })
   @ApiBody({ type: CreateUserDto })
   @checkAbilites({ action: 'create', subject: 'User' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
@@ -39,10 +47,38 @@ export class UsersController {
     return this.usersService.create(userData);
   }
 
+  @ApiOperation({ summary: 'List all users with the "User" role' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadUserDto, // Güncellenebilir
+    isArray: true,
+  })
+  @ApiException(() => UnauthorizedException, {
+    description: 'The user is not authorized',
+  })
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @Get('roleUser')
+  async findUserByRoleName() {
+    const users = await this.usersService.findUserByRoleName();
 
+    // Sadece istenen alanları içeren objeleri döndür
+    return users.map((user) => ({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    }));
+  }
   @ApiOperation({ summary: 'List all users' })
-  @ApiResponse({ status: 200, description: 'Successful.', type: ReadUserDto, isArray: true})
-  @ApiException(() => UnauthorizedException, { description: 'The user is not authorized' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadUserDto,
+    isArray: true,
+  })
+  @ApiException(() => UnauthorizedException, {
+    description: 'The user is not authorized',
+  })
   @checkAbilites({ action: 'manage', subject: 'User' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Get()
@@ -51,8 +87,10 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Fetch a specific user' })
-  @ApiResponse({ status: 200, description: 'Successful.', type: ReadUserDto})
-  @ApiException(() => NotFoundException, { description: 'The user was not found' })
+  @ApiResponse({ status: 200, description: 'Successful.', type: ReadUserDto })
+  @ApiException(() => NotFoundException, {
+    description: 'The user was not found',
+  })
   @checkAbilites({ action: 'read', subject: 'User' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Get(':id')
@@ -65,8 +103,13 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Update information for a specific user' })
-  @ApiResponse({ status: 200, description: 'User information has been updated successfully.' })
-  @ApiException(() => NotFoundException, { description: 'The user was not found' })
+  @ApiResponse({
+    status: 200,
+    description: 'User information has been updated successfully.',
+  })
+  @ApiException(() => NotFoundException, {
+    description: 'The user was not found',
+  })
   @ApiBody({ type: ReadUserDto })
   @checkAbilites({ action: 'update', subject: 'User' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
@@ -76,8 +119,13 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Delete a specific user' })
-  @ApiException(() => NotFoundException, { description: 'The user was not found' })
-  @ApiResponse({ status: 200, description: 'The user has been deleted successfully.' })
+  @ApiException(() => NotFoundException, {
+    description: 'The user was not found',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The user has been deleted successfully.',
+  })
   @checkAbilites({ action: 'delete', subject: 'User' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Delete(':id')
@@ -85,4 +133,3 @@ export class UsersController {
     await this.usersService.remove(id);
   }
 }
-

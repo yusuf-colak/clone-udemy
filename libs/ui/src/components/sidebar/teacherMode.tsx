@@ -19,7 +19,7 @@ const TeacherMode = () => {
           </Button>
         </Link>
       ) : (
-        <Link href="/teacher/courses">
+        <Link href="/teacher/coursesTable">
           <Button className="w-full border" variant="ghost" size="sm">
             Öğretmen Paneli
           </Button>
@@ -39,11 +39,11 @@ const DesktopTeacherMode = () => {
 
 const MobileTeacherMode = () => {
   return (
-    <div>
+    
       <SheetClose asChild>
         <TeacherMode />
       </SheetClose>
-    </div>
+    
   );
 };
 

@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import React, {useEffect, useRef, useState} from 'react';
-import {ArrowRight, Logout} from 'iconsax-react';
-import {useRouter, useSearchParams} from "next/navigation";
-import {Button} from "@/libs/ui/components/ui/button";
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRight, Logout } from 'iconsax-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Button } from '@/libs/ui/components/ui/button';
 import io from 'socket.io-client';
 
 export default function Login() {
@@ -20,8 +20,8 @@ export default function Login() {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    const res = await fetch("/api/login", {
-      method: "POST",
+    const res = await fetch('/api/login', {
+      method: 'POST',
       body: JSON.stringify({
         domain,
         email,
@@ -31,11 +31,11 @@ export default function Login() {
     const { success } = await res.json();
 
     if (success) {
-      const nextUrl = searchParams.get("next");
-      router.push(nextUrl ?? "/");
+      const nextUrl = searchParams.get('next');
+      router.push(nextUrl ?? '/');
       router.refresh();
     } else {
-      alert("Login failed");
+      alert('Login failed');
     }
   };
 
@@ -47,7 +47,9 @@ export default function Login() {
 
     // Check if NEXT_PUBLIC_SOCKET_URL is defined
     if (!process.env.NEXT_PUBLIC_SOCKET_URL) {
-      console.error("Socket URL is undefined. Please check your environment configuration.");
+      console.error(
+        'Socket URL is undefined. Please check your environment configuration.'
+      );
       return;
     }
 
@@ -67,7 +69,6 @@ export default function Login() {
 
   return (
     <>
-
       <div className={'bg-gray-50 h-screen w-full'}>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm p-6 bg-white rounded-xl shadow-md">
@@ -75,12 +76,17 @@ export default function Login() {
               <Logout className="mx-auto h-10 w-auto text-accent" size={24} />
 
               <h2 className=" text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                Welcome!
+                Hoşgeldin!
               </h2>
-              <p className={'text-gray-500'}>Sign to your account</p>
+              <p className={'text-gray-500'}>Giriş yap</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 space-y-6"
+              action="#"
+              method="POST"
+            >
               <div>
                 <input
                   id="email"
@@ -88,7 +94,7 @@ export default function Login() {
                   type="text"
                   autoComplete="email"
                   required
-                  placeholder="Email Address"
+                  placeholder="Email Adresi"
                   ref={emailRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
@@ -101,7 +107,7 @@ export default function Login() {
                   type="password"
                   autoComplete="password"
                   required
-                  placeholder="Password"
+                  placeholder="Şifre"
                   ref={passwordRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
@@ -118,15 +124,17 @@ export default function Login() {
                       />
                     </div>
                     <div className="ml-3 text-sm leading-6">
-
                       <p id="candidates-description" className="text-gray-500">
-                        Remember Me
+                        Beni hatırla
                       </p>
                     </div>
                   </div>
                   <div className="text-sm">
-                    <a href="#" className="font-semibold text-primary hover:text-primary">
-                      Forgot password?
+                    <a
+                      href="#"
+                      className="font-semibold text-primary hover:text-primary"
+                    >
+                      Parolanızı mı unuttunuz?
                     </a>
                   </div>
                 </div>
@@ -134,17 +142,14 @@ export default function Login() {
 
               <div className="mt-4">
                 <Button>
-                  Sign in
+                  Giriş yap
                   <ArrowRight className="w-auto" size={24} />
                 </Button>
-
               </div>
             </form>
           </div>
         </div>
       </div>
-
     </>
-    )
+  );
 }
-

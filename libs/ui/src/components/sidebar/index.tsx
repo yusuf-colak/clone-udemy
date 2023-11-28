@@ -3,13 +3,10 @@ import SidebarDesktop from '@/libs/ui/components/sidebar/desktop';
 import SidebarMobile from '@/libs/ui/components/sidebar/mobile';
 import React, { useEffect, useState } from 'react';
 import {
-  BookOpen,
   LayoutDashboard,
-  Settings,
   Users,
   Compass,
   List,
-  BarChart,
   Plus,
   Newspaper,
 } from 'lucide-react';
@@ -102,6 +99,11 @@ export default function Sidebar() {
       title: 'Yeni Kurs Ekle',
       icon: Plus,
       href: '/teacher/addCourse',
+    },
+    {
+      title: 'Kullanıcılar',
+      icon: Users,
+      href: '/teacher/users',
     },
   ];
   return (
