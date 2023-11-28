@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,6 +19,14 @@ import {
   FormLabel,
   FormMessage,
 } from '@/libs/ui/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/libs/ui/components/ui/select';
+
 import { Input } from '@/libs/ui/components/ui/input';
 import { Button } from '@/libs/ui/components/ui/button';
 import * as z from 'zod';
@@ -43,9 +51,13 @@ const formSchema = z.object({
       message: 'Şifre alanı boş bıraklıamaz ve en az 6 karakter olmalıdır.',
     })
     .max(15),
+  roleId: z.string({
+    required_error: 'Lütfen rol seçiniz',
+  }),
 });
 const UserAddPage = () => {
   const auth: any = useAuth();
+  const [roles, setRoles] = React.useState([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,19 +67,54 @@ const UserAddPage = () => {
     },
   });
 
-  // 2. Define a submit handler.
+  useEffect(() => {
+    const fetchRoles = async () => {
+      if (auth?.token) {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/roles`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+            },
+          }
+        );
+        setRoles(response.data);
+        console.log(response.data);
+      }
+    };
+    fetchRoles();
+  }, [auth?.token]);
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post(
+      const responseUser = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/users`,
-        values,
+        {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        },
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,
           },
         }
       );
-      console.log(response.data);
+
+      const responseRole = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/rolesonusers`,
+        {
+          userId: responseUser.data.id,
+          roleId: values.roleId,
+          assignedAt: new Date(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
+      );
+      console.log('responseRole.data', responseRole.data);
+      console.log('responseUser.data', responseUser.data);
       toast.success('Kullanıcı başarıyla oluşturuldu.');
     } catch {
       toast.error('Bir hata oluştu');
@@ -119,6 +166,34 @@ const UserAddPage = () => {
                     <FormControl>
                       <Input placeholder="Şifre" {...field} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="roleId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Rol Seçiniz</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Lütfen Rol Seçiniz" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {roles.map((role: any) => (
+                          <SelectItem key={role.id} value={role.id}>
+                            {role.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
                     <FormMessage />
                   </FormItem>
                 )}

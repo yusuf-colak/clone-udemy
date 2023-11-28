@@ -20,6 +20,8 @@ import { AttachmentsController } from '../modules/attachments/controllers/attach
 import { AttachmentsService } from '../modules/attachments/services/attachments.service';
 import { TrackingsController } from '../modules/trackings/controllers/trackings.controller';
 import { TrackingsService } from '../modules/trackings/services/trackings.service';
+import { RolesOnUsersController } from '../modules/rolesOnUsers/controllers/RolesOnUsers.controller';
+import { RolesOnUsersService } from '../modules/rolesOnUsers/services/RolesOnUsers.service';
 
 @Module({
   controllers: [
@@ -33,6 +35,7 @@ import { TrackingsService } from '../modules/trackings/services/trackings.servic
     ChaptersController,
     AttachmentsController,
     TrackingsController,
+    RolesOnUsersController,
   ],
   providers: [
     PrismaService,
@@ -46,6 +49,7 @@ import { TrackingsService } from '../modules/trackings/services/trackings.servic
     ChaptersService,
     AttachmentsService,
     TrackingsService,
+    RolesOnUsersService,
   ],
   exports: [],
 })
