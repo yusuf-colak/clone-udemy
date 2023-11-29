@@ -63,12 +63,12 @@ const ChapterSidebar = ({
     fetchVideoDurations();
   }, [courses.chapters]);
   return (
-    <div className="flex flex-col gap-y-10  h-full ">
+    <div className="flex flex-col gap-y-10  h-full  ">
       <div className=" p-2">
-        <h2 className="text-xl font-medium text-black border-b-2 border-black mb-2">
-          Kurs içeriği
+        <h2 className="text-xl font-medium text-blue-950 border-b-2 border-blue-950 mb-2">
+          Kurs videoları
         </h2>
-        <ScrollArea className=" lg:h-40 lg:w-full  ">
+        <ScrollArea className=" h-[400px]  w-full  ">
           {courses.chapters?.map((chapter, index) => (
             <div className=" w-full lg:w-[350px]" key={chapter.id}>
               {chapter.id && (
@@ -114,7 +114,7 @@ const ChapterSidebar = ({
           <div className="text-xl text-black font-semibold border-b-2 border-black ">
             Kurs Dosyaları
           </div>
-          <ScrollArea className=" lg:h-32 lg:w-full ">
+          <ScrollArea className=" h-[200px] w-full ">
             {courses.attachments?.map((attachment) => (
               <div className="flex flex-row justify-between items-center hover:bg-gray-100 gap-x-2 border-b m-1">
                 {attachment.name}

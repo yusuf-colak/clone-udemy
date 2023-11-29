@@ -58,7 +58,7 @@ export function DataTableComps<TData, TValue>({
   });
   return (
     <div>
-      <div className="flex flex-wrap  items-center py-2">
+      <div className="flex flex-row justify-between  items-center py-2">
         <Filter table={table} />
         <UserAddPage />
       </div>

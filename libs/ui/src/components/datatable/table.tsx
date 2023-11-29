@@ -1,5 +1,5 @@
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -11,8 +11,8 @@ import {
   getFilteredRowModel,
   VisibilityState,
   getPaginationRowModel,
-} from "@tanstack/react-table";
-import { Button } from "@/libs/ui/components/ui/button";
+} from '@tanstack/react-table';
+import { Button } from '@/libs/ui/components/ui/button';
 import {
   Table,
   TableBody,
@@ -20,25 +20,25 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/libs/ui/components/ui/table";
+} from '@/libs/ui/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/libs/ui/components/ui/dropdown-menu";
+} from '@/libs/ui/components/ui/dropdown-menu';
 
-import Filter from "./filter";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import Filter from './filter';
+import { ArrowBigLeft, ArrowBigRight } from 'lucide-react';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
 export function DataTableComps<TData, TValue>({
-                                                columns,
-                                                data,
-                                              }: DataTableProps<TData, TValue>) {
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -103,9 +103,9 @@ export function DataTableComps<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
@@ -117,7 +117,7 @@ export function DataTableComps<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

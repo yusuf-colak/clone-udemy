@@ -35,7 +35,8 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useAuth } from 'apps/website/hooks/useAuth';
 import { toast } from 'react-hot-toast';
-import { X } from 'lucide-react';
+import { Edit, X } from 'lucide-react';
+import { delay } from 'framer-motion';
 const formSchema = z.object({
   name: z
     .string()
@@ -44,26 +45,34 @@ const formSchema = z.object({
     })
     .max(50),
   email: z.string().email({ message: 'Geçersiz email adresi' }),
-  password: z
-    .string()
-    .min(6, {
+  password: z.string().refine(
+    (value) => {
+      // Şifre alanı boşsa uyarı verme
+      if (value === '') {
+        return true;
+      }
+      // Şifre alanı 6 haneden küçükse hata ver
+      return value.length >= 6;
+    },
+    {
       message: 'Şifre alanı boş bırakılamaz ve en az 6 karakter olmalıdır.',
-    })
-    .max(15),
+    }
+  ),
   roleId: z.string({
     required_error: 'Lütfen rol seçiniz',
   }),
 });
 
-const UserAddPage = () => {
+const UserEditPage = ({ userId, userName, mail, roleId }) => {
   const auth: any = useAuth();
   const [roles, setRoles] = React.useState([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
+      name: userName,
       password: '',
-      email: '',
+      email: mail,
+      roleId: roleId,
     },
   });
 
@@ -86,13 +95,19 @@ const UserAddPage = () => {
   }, [auth?.token]);
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const responseUser = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/users`,
-        {
-          name: values.name,
-          email: values.email,
-          password: values.password,
-        },
+      const userData = {
+        name: values.name,
+        email: values.email,
+      };
+
+      // Eğer şifre alanı boş değilse, şifreyi güncelle
+      if (values.password !== '') {
+        userData.password = values.password;
+      }
+
+      const responseUser = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/${userId}`,
+        userData,
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,
@@ -100,8 +115,8 @@ const UserAddPage = () => {
         }
       );
 
-      const responseRole = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/rolesonusers`,
+      const responseRole = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_URL}/rolesonusers/${userId}/${roleId}`,
         {
           userId: responseUser.data.id,
           roleId: values.roleId,
@@ -113,8 +128,9 @@ const UserAddPage = () => {
           },
         }
       );
-      form.reset();
-      toast.success('Kullanıcı başarıyla oluşturuldu.');
+
+      window.location.reload();
+      toast.success('Kullanıcı başarıyla güncellendi.');
     } catch (error) {
       if (error.response && error.response.status === 409) {
         toast.error('E-posta adresi zaten kullanılıyor.');
@@ -122,19 +138,18 @@ const UserAddPage = () => {
         console.error('Bir hata oluştu:', error);
       }
     }
-    console.log(values);
   };
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="border shadow-md hover:shadow-lg" variant="ghost">
-          Kullanıcı Ekle
+        <Button className="rounded-full" size="sm" variant="ghost">
+          <Edit />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="flex justify-between items-center">
-            Kullanıcı Ekle
+            Kullanıcı Güncelle
             <AlertDialogCancel className="rounded-full p-2">
               <X />
             </AlertDialogCancel>
@@ -209,7 +224,7 @@ const UserAddPage = () => {
                 )}
               />
               <Button className="flex w-full border" type="submit">
-                Kullanıcıyı Ekle
+                Kullanıcıyı Güncelle
               </Button>
             </form>
           </Form>
@@ -220,4 +235,4 @@ const UserAddPage = () => {
   );
 };
 
-export default UserAddPage;
+export default UserEditPage;

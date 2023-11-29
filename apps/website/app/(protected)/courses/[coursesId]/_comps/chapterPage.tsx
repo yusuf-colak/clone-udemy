@@ -113,7 +113,7 @@ const ChapterPage = ({
 
   return (
     <div className="w-full p-5">
-      <h2 className="lg:text-2xl text-xl font-semibold text-gray-700">
+      <h2 className="lg:text-2xl text-xl font-semibold text-blue-950">
         {chapter?.title}
       </h2>
 
@@ -126,7 +126,7 @@ const ChapterPage = ({
               src={chapter?.videoUrl}
               autoPlay
               onTimeUpdate={handleTimeUpdate}
-              className="lg:w-5/6 w-full  "
+              className="lg:w-11/12 w-full  "
             />
           </div>
         </>
@@ -136,7 +136,9 @@ const ChapterPage = ({
         </div>
       )}
 
-      <p>{chapter?.description}</p>
+      <p>
+        <span>Video Açıklaması: </span> {chapter?.description}
+      </p>
     </div>
   );
 };

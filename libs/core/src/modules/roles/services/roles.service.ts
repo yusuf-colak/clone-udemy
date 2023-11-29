@@ -17,12 +17,17 @@ export class RolesService {
 
   findAll(): Promise<Role[]> {
     return this.prisma.role.findMany({
+      where: {
+        name: {
+          not: 'Superadmin', // Exclude roles with the 'Superadmin' name
+        },
+      },
       include: {
         permissions: true,
       },
     });
   }
- 
+
   async findOne(id: string): Promise<Role | null> {
     return this.prisma.role.findUnique({
       where: {

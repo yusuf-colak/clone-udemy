@@ -27,9 +27,12 @@ interface DescriptionFormProps {
 }
 
 const formSchema = z.object({
-  description: z.string().min(1, {
-    message: 'Description is required',
-  }),
+  description: z
+    .string()
+    .min(1, {
+      message: 'Açıklama zorunludur...',
+    })
+    .max(500, { message: 'Açıklama 500 karakterden fazla olamaz...' }),
 });
 
 export const DescriptionForm = ({

@@ -2,7 +2,13 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/libs/ui/components/ui/button';
-import { ArrowUpDown, Edit, MoreHorizontal } from 'lucide-react';
+import {
+  ArrowUpDown,
+  Ban,
+  CheckCircle2,
+  Edit,
+  MoreHorizontal,
+} from 'lucide-react';
 import CourseDeleteButton from './courseDeleteButton';
 import Link from 'next/link';
 import { Image } from 'lucide-react';
@@ -13,7 +19,6 @@ export type Payment = {
   title: string;
   categoryName: string;
 };
-
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: 'title',
@@ -52,11 +57,30 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
+    header: () => <div>Yayınlanma durumu </div>,
+    accessorKey: 'isPublished',
+    cell: ({ row }) => (
+      <div className="flex flex-row flex-nowrap items-center ">
+        <div>
+          {row.original.isPublished ? (
+            <CheckCircle2 size="18" color={'green'} />
+          ) : (
+            <Ban size="18" color={'red'} />
+          )}
+        </div>
+
+        <div className="pl-1">
+          {row.original.isPublished ? 'Yayında ' : 'Yayında değil'}
+        </div>
+      </div>
+    ),
+  },
+  {
     accessorKey: 'categoryName',
     header: 'Kategori',
   },
   {
-    header: () => <div className="flex justify-end">Düzenle / Sil</div>,
+    header: () => <div className="flex justify-end mr-6">Düzenle / Sil</div>,
     accessorKey: 'About1',
     cell: ({ row }) => (
       <div className="flex flex-row justify-end  ">
@@ -67,7 +91,7 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </Link>
         </div>
-        <div>
+        <div className="ml-2">
           <CourseDeleteButton courseId={row.original.id} />
         </div>
       </div>

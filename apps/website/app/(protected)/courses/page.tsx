@@ -20,6 +20,9 @@ import Link from 'next/link';
 import { getFileS3Url } from '@/s3';
 import { CheckCircle, Image } from 'lucide-react';
 import { Progress } from '@/libs/ui/components/ui/progress';
+import { Button } from '@/libs/ui/components/ui/button';
+import { Book } from 'iconsax-react';
+import { ScrollArea } from '@/libs/ui/components/ui/scroll-area';
 
 const CoursesPage = () => {
   const auth: any = useAuth();
@@ -57,7 +60,7 @@ const CoursesPage = () => {
                   return { ...course, imageUrl: url };
                 })
               );
-
+              console.log(updatedData);
               setCourses(updatedData);
             } else {
               console.error(
@@ -80,79 +83,92 @@ const CoursesPage = () => {
   }, [auth?.token]);
   return (
     <React.Fragment>
-      <div className="flex gap-5 flex-wrap justify-center">
+      <div className="flex gap-5 flex-wrap justify-start  ">
         {courses.map((course: any) =>
           course.isPublished ? (
-            <Card key={course.id} className="w-[400px] min-w-[250px]">
-              <Link
-                className="hover:cursor-pointer"
-                href={`/courses/${course.id}`}
-              >
-                {trackings.map((tracking: any) => {
-                  if (tracking.courseId === course.id) {
-                    return (
-                      <>
-                        <Progress
-                          key={tracking.courseId}
-                          value={
-                            (tracking.count / course.chapters.length) * 100
-                          }
-                        />
-                      </>
-                    );
-                  }
-                })}
-                <CardHeader>
-                  <CardTitle className="flex justify-between">
-                    <>
-                      {course.imageUrl ? (
+            <div
+              key={course.id}
+              className="w-[400px] min-w-[250px] h-[520px]  bg-slate-100 shadow-lg hover:shadow-slate-400  shadow-slate-300 rounded-3xl transition ease-in-out duration-500"
+            >
+              <div>
+                <div className="flex justify-between">
+                  <>
+                    {course.imageUrl ? (
+                      <div className="flex flex-col w-full">
                         <img
-                          className="h-[100px] w-full object-none flex justify-center items-center border-0 rounded-xl"
+                          className=" w-full h-[200px] object-fill flex justify-center items-center rounded-t-3xl "
                           src={course.imageUrl}
                           alt="course"
                         />
-                      ) : (
-                        <div className="h-[100px] w-[300px] bg-slate-100 flex items-center justify-center rounded-xl">
-                          <Image color="grey" size={40} />
-                        </div>
-                      )}
-                      {trackings.map((tracking: any) => {
-                        if (
-                          tracking.courseId === course.id &&
-                          tracking.count === course.chapters.length
-                        ) {
-                          return (
-                            <CheckCircle
-                              key={tracking.courseId}
-                              size={24}
-                              className="text-green-500"
-                            />
-                          );
-                        }
-                      })}
-                    </>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <h1 className="w-[330px] truncate ... text-2xl">
-                          {course.title}
-                        </h1>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p> {course.title}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-
-                  <CardDescription className="text-xs">
-                    {course.description}
-                  </CardDescription>
-                </CardContent>
-              </Link>
-            </Card>
+                        {trackings.map((tracking: any) => {
+                          if (tracking.courseId === course.id) {
+                            return (
+                              <Progress
+                                className="rounded-t-3xl"
+                                key={tracking.courseId}
+                                value={
+                                  (tracking.count / course.chapters.length) *
+                                  100
+                                }
+                              />
+                            );
+                          } else {
+                            return (
+                              <Progress
+                                className="rounded-t-3xl"
+                                key={'yok'}
+                                value={0}
+                              />
+                            );
+                          }
+                        })}
+                      </div>
+                    ) : (
+                      <div className="h-[200px] w-full bg-slate-100 flex items-center justify-center rounded-3xl ">
+                        <Image color="grey" size={40} />
+                      </div>
+                    )}
+                  </>
+                </div>
+              </div>
+              <div className="flex flex-col justify-between h-[320px] p-5 pt-3 gap-y-3 ">
+                <h2 className="text-blue-950 text-3xl"> {course.title}</h2>
+                <ScrollArea className=" border-0 h-[110px] w-[350px] rounded-md   text-xs text-blue-900">
+                  {course.description}
+                </ScrollArea>
+                <div>
+                  <span className="mb-2 text-blue-800 flex flex-row flex-nowrap gap-x-1">
+                    <Book /> {course.chapters?.length} ders{' '}
+                    {trackings.map((tracking: any) => {
+                      if (
+                        tracking.courseId === course.id &&
+                        tracking.count === course.chapters.length
+                      ) {
+                        return (
+                          <CheckCircle
+                            key={tracking.courseId}
+                            size={24}
+                            className="text-green-500"
+                          />
+                        );
+                      }
+                    })}
+                  </span>
+                  <Link
+                    className="hover:cursor-pointer"
+                    href={`/courses/${course.id}`}
+                  >
+                    <Button
+                      size="custom"
+                      variant="custom"
+                      className="  flex w-full"
+                    >
+                      Kursa Katıl
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
           ) : null
         )}
       </div>

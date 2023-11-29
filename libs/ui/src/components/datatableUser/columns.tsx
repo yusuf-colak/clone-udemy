@@ -6,6 +6,7 @@ import { ArrowUpDown, Edit, MoreHorizontal, User } from 'lucide-react';
 import CourseDeleteButton from './userDeleteButton';
 import Link from 'next/link';
 import { Image } from 'lucide-react';
+import UserEditPage from './userEditPage';
 
 export type Payment = {
   id: number;
@@ -56,16 +57,24 @@ export const columns: ColumnDef<Payment>[] = [
     header: 'Mail Adresi',
   },
   {
+    header: () => <div>Rol Drumumu</div>,
+    accessorKey: 'roleıd',
+    cell: ({ row }) => (
+      <div >{row.original.roleName}</div>
+    ),
+  },
+  {
     header: () => <div className="flex justify-end">Düzenle / Sil</div>,
     accessorKey: 'About1',
     cell: ({ row }) => (
       <div className="flex flex-row justify-end  ">
         <div>
-          <Link href={`/teacher/users/${row.original.id}`}>
-            <Button className="rounded-full" size="sm" variant="ghost">
-              <Edit />
-            </Button>
-          </Link>
+          <UserEditPage
+            userId={row.original.id}
+            userName={row.original.name}
+            mail={row.original.email}
+            roleId={row.original.roleId}
+          />
         </div>
         <div>
           <CourseDeleteButton

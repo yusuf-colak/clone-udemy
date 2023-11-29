@@ -61,7 +61,6 @@ export default function Datatable() {
           })
         );
 
-        console.log(updatedData);
         setData(updatedData);
       }
     } catch (error) {

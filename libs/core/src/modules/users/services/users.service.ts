@@ -43,7 +43,9 @@ export class UsersService {
         roles: {
           some: {
             role: {
-              name: 'User',
+              name: {
+                not: 'Superadmin', // Exclude users with the 'Superadmin' role
+              },
             },
           },
         },

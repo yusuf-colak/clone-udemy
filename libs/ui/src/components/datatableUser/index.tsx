@@ -6,6 +6,7 @@ import { Payment, columns } from './columns';
 import axios from 'axios';
 import { useAuth } from 'apps/website/hooks/useAuth';
 import { getFileS3Url } from '@/s3';
+
 export default function Datatable() {
   const [data, setData] = useState<Payment[]>([]);
   const [categories, setCategories] = useState<any[]>([]); // any tipi kullanıldı, gerçek tipinize uygun bir tip kullanmalısınız
@@ -16,7 +17,7 @@ export default function Datatable() {
 
     try {
       // Kategorileri çek
-      const response = await axios.get(
+      const responseUser = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/users/roleUser`,
         {
           headers: {
@@ -24,9 +25,40 @@ export default function Datatable() {
           },
         }
       );
+      const responseRolesonUser = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/rolesonusers`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
+      );
+      const responseRoles = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/roles`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
+      );
 
-      console.log('response', response.data);
-      setData(response.data);
+      const matchedData = responseUser.data.map((user) => {
+        const matchingRole = responseRolesonUser.data.find(
+          (role) => role.userId === user.id
+        );
+
+        const matchingRoleDetails = responseRoles.data.find(
+          (roleDetails) => roleDetails.id === matchingRole?.roleId
+        );
+
+        return {
+          ...user,
+          roleId: matchingRole?.roleId || null,
+          roleName: matchingRoleDetails?.name || null,
+        };
+      });
+
+      setData(matchedData);
     } catch (error) {
       console.error('Error fetching course data:', error);
       throw error;
@@ -37,7 +69,5 @@ export default function Datatable() {
     getData();
   }, [auth?.token]);
 
-  return (
-    <DataTableComps columns={columns} data={data} />
-  );
+  return <DataTableComps columns={columns} data={data} />;
 }

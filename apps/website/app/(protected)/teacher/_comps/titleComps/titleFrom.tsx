@@ -25,9 +25,12 @@ interface TitleFromProps {
   courseId: string;
 }
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: 'Title is required',
-  }),
+  title: z
+    .string()
+    .min(1, {
+      message: 'Başlık zorunludur',
+    })
+    .max(40, { message: 'Başlık en fazla 40 karakter olmalıdır.' }),
 });
 
 const TitleFrom = ({ courseData, courseId, setCourseData }: TitleFromProps) => {
