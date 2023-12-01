@@ -197,6 +197,7 @@ tracking Tracking[]
 model Tracking {
   id          String   @id @default(uuid())
   isCompleted Boolean? @default(false)
+  isTime Float? @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

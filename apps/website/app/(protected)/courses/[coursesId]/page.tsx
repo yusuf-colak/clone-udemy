@@ -11,7 +11,6 @@ const CoursesVideoPage = ({ params }: { params: { coursesId: string } }) => {
   const [courses, setCourses] = React.useState([]);
   const [previewCover, setPreviewCover] = React.useState('');
   const [trackings, setTrackings] = React.useState([]);
-
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,10 +38,31 @@ const CoursesVideoPage = ({ params }: { params: { coursesId: string } }) => {
     }
   }, [auth?.token, params.chapterId]);
   useEffect(() => {
-    if (courses.chapters?.length) {
-      setPreviewCover(courses.chapters[0].id);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/trackings/user/${auth?.user.id}/courseId/${courses?.id}/openChapterId`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+            },
+          }
+        );
+        if (response.data) {
+          setPreviewCover(response.data);
+        } else {
+          setPreviewCover(courses.chapters[0].id);
+        }
+      } catch (error) {
+        console.error('Error fetching course data:', error);
+      }
+    };
+
+    if (courses?.chapters) {
+      fetchData();
     }
   }, [courses.chapters]);
+
   return (
     <div className="w-full flex flex-col lg:flex-row">
       <div className="w-full">

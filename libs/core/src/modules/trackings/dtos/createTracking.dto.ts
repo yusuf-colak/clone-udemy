@@ -2,21 +2,29 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateTrackingDto {
-  @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000', description: 'userId' })
+  @ApiProperty({ example: 'boolean', description: 'isCompleted' })
   @IsNotEmpty()
-  userId!: string;
+  @IsOptional()
+  isCompleted?: boolean;
+
+  @ApiProperty({ example: 'number', description: 'isTime' })
+  @IsNotEmpty()
+  @IsOptional()
+  isTime?: number;
 
   @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000', description: 'courseId' })
   @IsNotEmpty()
   courseId!: string;
 
+ 
   @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000', description: 'chapterId' })
   @IsNotEmpty()
   chapterId!: string;
 
-  @ApiProperty({ example: 'boolean', description: 'isCompleted' })
+
+  @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000', description: 'userId' })
   @IsNotEmpty()
-  @IsOptional()
-  isCompleted?: boolean;
+  userId!: string;
+
 
 }

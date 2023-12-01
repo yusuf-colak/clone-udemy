@@ -47,7 +47,6 @@ const CoursesPage = () => {
             },
           }
         );
-        console.log(responseTracking.data);
         setTrackings(responseTracking.data);
         const updatedCourses = async () => {
           try {
@@ -60,7 +59,6 @@ const CoursesPage = () => {
                   return { ...course, imageUrl: url };
                 })
               );
-              console.log(updatedData);
               setCourses(updatedData);
             } else {
               console.error(
@@ -107,7 +105,8 @@ const CoursesPage = () => {
                                 className="rounded-t-3xl"
                                 key={tracking.courseId}
                                 value={
-                                  (tracking.count / course.chapters.length) *
+                                  (tracking.count /
+                                    course.chapters.length) *
                                   100
                                 }
                               />

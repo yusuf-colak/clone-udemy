@@ -95,7 +95,9 @@ const ChapterSidebar = ({
                     </div>
 
                     {trackings.find(
-                      (tracking) => tracking.chapterId === chapter.id
+                      (tracking) =>
+                        tracking.chapterId === chapter.id &&
+                        tracking.isCompleted
                     ) && (
                       <div className="flex items-center pr-2">
                         <CheckCircle color="green" size={25} />
