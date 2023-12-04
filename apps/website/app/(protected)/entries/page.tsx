@@ -26,6 +26,7 @@ const EntriesMain = () => {
             },
           }
         );
+
         setCompleteCourse(
           responseChapterLenght.data == responseTrackingLenght.data
             ? true

@@ -10,9 +10,16 @@ export class CreateAttachmentDto {
   @IsNotEmpty()
   url!: string;
 
-  @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000', description: 'courseId' })
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'courseId',
+  })
   @IsNotEmpty()
   courseId!: string;
 
-
+  @ApiProperty({
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    description: 'chapterId',
+  })
+  chapterId?: string;
 }

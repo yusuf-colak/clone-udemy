@@ -28,7 +28,11 @@ export class CoursesService {
       where: { id },
       include: {
         chapters: true,
-        attachments: true,
+        attachments: {
+          where: {
+            chapterId: null,
+          },
+        },
       },
     });
   }

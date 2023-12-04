@@ -4,31 +4,38 @@ import Link from 'next/link';
 import { SheetClose } from '../ui/sheet';
 import { usePathname, useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
+import { useAuth } from 'apps/website/hooks/useAuth';
 
 const TeacherMode = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isTeacherPage = pathname?.startsWith('/teacher');
   const isPlayerPage = pathname?.includes('/chapter');
+  const auth: any = useAuth();
+
   return (
     <React.Fragment>
-      {isTeacherPage || isPlayerPage ? (
-        <Link href="/courses" className="flex flex-row">
-          <Button className="w-full border" variant="ghost" size="sm">
-            <LogOut className="h-4 w-4 mr-2" /> Öğretmen Modundan Çık
-          </Button>
-        </Link>
-      ) : (
-        <Link href="/teacher/coursesTable">
-          <Button className="w-full border" variant="ghost" size="sm">
-            Öğretmen Paneli
-          </Button>
-        </Link>
-      )}
+      {auth?.user.roles[0].role.name === 'Superadmin' ||
+      auth?.user.roles[0].role.name === 'Admin' ? (
+        <React.Fragment>
+          {isTeacherPage || isPlayerPage ? (
+            <Link href="/" className="flex flex-row">
+              <Button className="w-full border" variant="ghost" size="sm">
+                <LogOut className="h-4 w-4 mr-2" /> Öğretmen Modundan Çık
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/teacher/coursesTable">
+              <Button className="w-full border" variant="ghost" size="sm">
+                Öğretmen Paneli
+              </Button>
+            </Link>
+          )}
+        </React.Fragment>
+      ) : null}
     </React.Fragment>
   );
 };
-
 const DesktopTeacherMode = () => {
   return (
     <React.Fragment>
@@ -39,11 +46,9 @@ const DesktopTeacherMode = () => {
 
 const MobileTeacherMode = () => {
   return (
-    
-      <SheetClose asChild>
-        <TeacherMode />
-      </SheetClose>
-    
+    <SheetClose asChild>
+      <TeacherMode />
+    </SheetClose>
   );
 };
 

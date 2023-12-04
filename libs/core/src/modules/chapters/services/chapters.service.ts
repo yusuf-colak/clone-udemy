@@ -32,7 +32,7 @@ export class ChaptersService {
     });
     return chapters.length;
   }
-  
+
   async findOne(id: string): Promise<Chapter | null> {
     return this.prisma.chapter.findUnique({
       where: { id },
@@ -41,6 +41,9 @@ export class ChaptersService {
   async findByCourseId(courseId: string): Promise<Chapter[]> {
     return this.prisma.chapter.findMany({
       where: { courseId },
+      include: {
+        attachments: true,
+      },
     });
   }
   async update(id: string, data: UpdateChapterDto): Promise<Chapter> {

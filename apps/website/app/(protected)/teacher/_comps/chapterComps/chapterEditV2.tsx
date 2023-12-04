@@ -10,6 +10,7 @@ import { Button } from '@/libs/ui/components/ui/button';
 import { Edit } from 'lucide-react';
 import TitleChapterEdit from './titleEdit';
 import DescriptionChapterEdit from './descriptionedit';
+import AttachmentChapter from './attachmentChapter';
 import { VideoChapterEdit } from './videoChapter';
 const ChapterEditV2 = ({ chapter, setChapters }) => {
   return (
@@ -18,6 +19,7 @@ const ChapterEditV2 = ({ chapter, setChapters }) => {
         <TitleChapterEdit chapter={chapter} setChapters={setChapters} />
         <DescriptionChapterEdit chapter={chapter} setChapters={setChapters} />
         <VideoChapterEdit chapter={chapter} setChapters={setChapters} />
+        <AttachmentChapter chapter={chapter} setChapters={setChapters} />
       </AccordionContent>
     </React.Fragment>
   );

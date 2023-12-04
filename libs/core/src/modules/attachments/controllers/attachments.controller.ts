@@ -14,13 +14,19 @@ import {
   Version,
 } from '@nestjs/common';
 import { AttachmentsService } from '../services/attachments.service';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/core/auth/jwt-auth.guard';
 import { ApiException } from '@nanogiants/nestjs-swagger-api-exception-decorator';
-import { CreateAttachmentDto } from "@/core/modules/attachments/dtos/createAttachment.dto";
-import { UpdateAttachmentDto } from "@/core/modules/attachments/dtos/updateAttachment.dto";
-import { checkAbilites } from "@/core/abilities/abilities.decorator";
-import { AbilitiesGuard } from "@/core/abilities/abilities.guard";
+import { CreateAttachmentDto } from '@/core/modules/attachments/dtos/createAttachment.dto';
+import { UpdateAttachmentDto } from '@/core/modules/attachments/dtos/updateAttachment.dto';
+import { checkAbilites } from '@/core/abilities/abilities.decorator';
+import { AbilitiesGuard } from '@/core/abilities/abilities.guard';
 
 @ApiTags('Attachments')
 @ApiBearerAuth()
@@ -29,7 +35,10 @@ export class AttachmentsController {
   constructor(private readonly attachmentsService: AttachmentsService) {}
 
   @ApiOperation({ summary: 'Create a new attachment' })
-  @ApiResponse({ status: 201, description: 'The attachment has been successfully created.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The attachment has been successfully created.',
+  })
   @ApiBody({ type: CreateAttachmentDto })
   @checkAbilites({ action: 'create', subject: 'Attachment' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
@@ -39,8 +48,15 @@ export class AttachmentsController {
   }
 
   @ApiOperation({ summary: 'List all attachments' })
-  @ApiResponse({ status: 200, description: 'Successful.', type: ReadAttachmentDto, isArray: true })
-  @ApiException(() => UnauthorizedException, { description: 'Not authorized to view the attachments' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadAttachmentDto,
+    isArray: true,
+  })
+  @ApiException(() => UnauthorizedException, {
+    description: 'Not authorized to view the attachments',
+  })
   @checkAbilites({ action: 'manage', subject: 'Attachment' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Get()
@@ -49,8 +65,14 @@ export class AttachmentsController {
   }
 
   @ApiOperation({ summary: 'Fetch a specific attachment' })
-  @ApiResponse({ status: 200, description: 'Successful.', type: ReadAttachmentDto })
-  @ApiException(() => NotFoundException, { description: 'The attachment was not found' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadAttachmentDto,
+  })
+  @ApiException(() => NotFoundException, {
+    description: 'The attachment was not found',
+  })
   @checkAbilites({ action: 'read', subject: 'Attachment' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Get(':id')
@@ -62,20 +84,55 @@ export class AttachmentsController {
     return attachment;
   }
 
+  @ApiOperation({ summary: 'Fetch a specific attachment' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful.',
+    type: ReadAttachmentDto,
+  })
+  @ApiException(() => NotFoundException, {
+    description: 'The attachment was not found',
+  })
+  @checkAbilites({ action: 'read', subject: 'Attachment' })
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @Get('/chapterId/:chapterId')
+  async findByChapterId(@Param('chapterId') chapterId: string) {
+    const attachment = await this.attachmentsService.findByChapterId(chapterId);
+    if (!attachment) {
+      throw new NotFoundException(
+        `Attachment with chapterId ${chapterId} does not exist.`
+      );
+    }
+    return attachment;
+  }
+
   @ApiOperation({ summary: 'Update information for a specific attachment' })
-  @ApiResponse({ status: 200, description: 'The attachment information has been successfully updated.' })
-  @ApiException(() => NotFoundException, { description: 'The attachment was not found' })
+  @ApiResponse({
+    status: 200,
+    description: 'The attachment information has been successfully updated.',
+  })
+  @ApiException(() => NotFoundException, {
+    description: 'The attachment was not found',
+  })
   @ApiBody({ type: UpdateAttachmentDto })
   @checkAbilites({ action: 'update', subject: 'Attachment' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() attachmentData: UpdateAttachmentDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() attachmentData: UpdateAttachmentDto
+  ) {
     return this.attachmentsService.update(id, attachmentData);
   }
 
   @ApiOperation({ summary: 'Delete a specific attachment' })
-  @ApiResponse({ status: 200, description: 'The attachment has been successfully deleted.' })
-  @ApiException(() => NotFoundException, { description: 'The attachment was not found' })
+  @ApiResponse({
+    status: 200,
+    description: 'The attachment has been successfully deleted.',
+  })
+  @ApiException(() => NotFoundException, {
+    description: 'The attachment was not found',
+  })
   @checkAbilites({ action: 'delete', subject: 'Attachment' })
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
   @Delete(':id')

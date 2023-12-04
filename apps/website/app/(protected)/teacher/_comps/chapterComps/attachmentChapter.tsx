@@ -24,10 +24,9 @@ import { getFileS3Url } from '@/s3';
 import AttachmentDelete from './attachmentDelete';
 import AttachmentDow from './attachmentDow';
 
-interface AttachmentFromProps {
-  courseData: Course;
-  courseId: string;
-  setCourseData: any;
+interface AttachmentChapterFromProps {
+  chapter: any;
+  setChapters: any;
 }
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -35,11 +34,10 @@ const formSchema = z.object({
   }),
 });
 
-export const AttachmentForm = ({
-  courseData,
-  courseId,
-  setCourseData,
-}: AttachmentFromProps) => {
+const AttachmentChapter = ({
+  chapter,
+  setChapters,
+}: AttachmentChapterFromProps) => {
   const auth: any = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [previewCover, setPreviewCover] = useState(null);
@@ -54,8 +52,8 @@ export const AttachmentForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name:
-        fileNamesEdit !== null && courseData?.attachments
-          ? courseData?.attachments[fileNamesEdit]?.name
+        fileNamesEdit !== null && chapter?.attachments
+          ? chapter?.attachments[fileNamesEdit]?.name
           : '',
     },
   });
@@ -69,7 +67,8 @@ export const AttachmentForm = ({
           {
             name: file.fileName,
             url: file.fileName,
-            courseId: courseId,
+            courseId: chapter.courseId,
+            chapterId: chapter.id,
           },
           {
             headers: {
@@ -77,10 +76,21 @@ export const AttachmentForm = ({
             },
           }
         );
-        setCourseData((current) => ({
-          ...current,
-          attachments: [...current.attachments, responsePost.data],
-        }));
+        console.log(responsePost.data);
+        setChapters((chapters: any) => {
+          const index = chapters.findIndex(
+            (item: any) => item.id === chapter.id
+          );
+          const updatedChapters = [...chapters];
+          updatedChapters[index] = {
+            ...updatedChapters[index],
+            attachments: [
+              ...updatedChapters[index].attachments,
+              responsePost.data,
+            ],
+          };
+          return updatedChapters;
+        });
       } catch (error) {
         console.error('Error uploading file:', error);
         toast.error('Dosya yüklenirken bir hata oluştu');
@@ -93,17 +103,17 @@ export const AttachmentForm = ({
   };
 
   useEffect(() => {
-    if (courseData.url) {
-      getFileS3Url(courseData.url).then((url) => {
+    if (chapter.url) {
+      getFileS3Url(chapter.url).then((url) => {
         setPreviewCover(url);
       });
     }
-  }, [courseData.imageUrl]);
+  }, [chapter.imageUrl]);
 
   const fileEdit = (index: number) => {
     setFileNamesEdit(index);
-    form.setValue('name', courseData?.attachments[index]?.name || '');
-    setAttachmentId(courseData?.attachments[index]?.id || '');
+    form.setValue('name', chapter?.attachments[index]?.name || '');
+    setAttachmentId(chapter?.attachments[index]?.id || '');
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -117,13 +127,17 @@ export const AttachmentForm = ({
           },
         }
       );
-
-      setCourseData((current) => ({
-        ...current,
-        attachments: current.attachments.map((item) =>
-          item.id === attachmentId ? response.data : item
-        ),
-      }));
+      setChapters((current) => {
+        const index = current.findIndex((item: any) => item.id === chapter.id);
+        const updatedChapters = [...current];
+        updatedChapters[index] = {
+          ...updatedChapters[index],
+          attachments: updatedChapters[index].attachments.map((item: any) =>
+            item.id === attachmentId ? response.data : item
+          ),
+        };
+        return updatedChapters;
+      });
       setFileNamesEdit(null);
       toast.success('Başarıyla güncellendi');
       toggleEdit();
@@ -146,19 +160,20 @@ export const AttachmentForm = ({
       });
     }
   };
+
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Dosyalar
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing && <>İptal</>}
-          {!isEditing && !courseData.imageUrl && (
+          {!isEditing && !chapter.imageUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
               Dosya Ekle
             </>
           )}
-          {!isEditing && courseData.imageUrl && (
+          {!isEditing && chapter.imageUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
               Dosya Düzenle
@@ -167,54 +182,56 @@ export const AttachmentForm = ({
         </Button>
       </div>
       {!isEditing &&
-        (!courseData.attachments ? (
+        (!chapter.attachments ? (
           <div className="flex items-center justify-center  bg-slate-200 rounded-md">
             <ImageIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative mt-2  w-full">
-            {courseData.attachments.map((attachment: any, index: number) => (
+            {chapter.attachments.map((attachment: any, index: number) => (
               <div
                 key={index}
                 className="flex gap-x-2 bg-slate-200 text-slate-700 rounded-md mb-4 text-sm "
               >
-                <div className=" py-2 pl-1 border-r transition ">
-                  {fileNamesEdit == index ? (
-                    <Form {...form}>
-                      <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-x-4  flex flex-row items-center "
-                      >
-                        <FormField
-                          control={form.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormControl>
-                                <Input
-                                  disabled={isSubmitting}
-                                  placeholder="e.g. 'Advanced web development'"
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <div className="flex items-center gap-x-2">
-                          <Button
-                            disabled={!isValid || isSubmitting}
-                            type="submit"
-                          >
-                            Kaydet
-                          </Button>
-                        </div>
-                      </form>
-                    </Form>
-                  ) : (
-                    <div>{attachment.name} </div>
-                  )}
-                </div>
+                {
+                  <div className=" py-2 pl-1 border-r transition ">
+                    {fileNamesEdit == index ? (
+                      <Form {...form}>
+                        <form
+                          onSubmit={form.handleSubmit(onSubmit)}
+                          className="space-x-4  flex flex-row items-center "
+                        >
+                          <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormControl>
+                                  <Input
+                                    disabled={isSubmitting}
+                                    placeholder="e.g. 'Advanced web development'"
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <div className="flex items-center gap-x-2">
+                            <Button
+                              disabled={!isValid || isSubmitting}
+                              type="submit"
+                            >
+                              Kaydet
+                            </Button>
+                          </div>
+                        </form>
+                      </Form>
+                    ) : (
+                      <div>{attachment.name} </div>
+                    )}
+                  </div>
+                }
                 <div className="ml-auto pr-2 flex items-center gap-x-2">
                   <AttachmentDow attachment={attachment} />
                   <Button
@@ -226,22 +243,21 @@ export const AttachmentForm = ({
                   </Button>
                   <AttachmentDelete
                     attachment={attachment}
-                    setCourseData={setCourseData}
+                    setChapters={setChapters}
                   />
                 </div>
               </div>
             ))}
           </div>
         ))}
-      {courseData?.attachments.length < 1 && (
+      {chapter?.attachments.length < 1 && (
         <div className="text-slate-500 text-sm">Dosya bulunamadı...</div>
       )}
-
       {isEditing && (
         <div>
           <FileUploader
             multiple={true}
-            tenant="attachment"
+            tenant="attachment/chapters"
             onFinish={handleFileUploadFinish}
           />
         </div>
@@ -249,3 +265,5 @@ export const AttachmentForm = ({
     </div>
   );
 };
+
+export default AttachmentChapter;

@@ -23,6 +23,7 @@ import { Progress } from '@/libs/ui/components/ui/progress';
 import { Button } from '@/libs/ui/components/ui/button';
 import { Book } from 'iconsax-react';
 import { ScrollArea } from '@/libs/ui/components/ui/scroll-area';
+import Greeting from '@/libs/ui/components/greeting';
 
 const CoursesPage = () => {
   const auth: any = useAuth();
@@ -81,6 +82,8 @@ const CoursesPage = () => {
   }, [auth?.token]);
   return (
     <React.Fragment>
+      <Greeting />
+
       <div className="flex gap-5 flex-wrap justify-start  ">
         {courses.map((course: any) =>
           course.isPublished ? (
@@ -105,8 +108,7 @@ const CoursesPage = () => {
                                 className="rounded-t-3xl"
                                 key={tracking.courseId}
                                 value={
-                                  (tracking.count /
-                                    course.chapters.length) *
+                                  (tracking.count / course.chapters.length) *
                                   100
                                 }
                               />
@@ -155,7 +157,7 @@ const CoursesPage = () => {
                   </span>
                   <Link
                     className="hover:cursor-pointer"
-                    href={`/courses/${course.id}`}
+                    href={`/${course.id}`}
                   >
                     <Button
                       size="custom"

@@ -35,7 +35,7 @@ export const columns: ColumnDef<Payment>[] = [
         )}
         <Link
           className="hover:cursor-pointer ml-3"
-          href={`/courses/${row.original.id}`}
+          href={`/${row.original.id}`}
         >
           <h1 className="text-lg font-semibold"> {row.original.name}</h1>
         </Link>

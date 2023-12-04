@@ -61,7 +61,7 @@ const CoursesVideoPage = ({ params }: { params: { coursesId: string } }) => {
     if (courses?.chapters) {
       fetchData();
     }
-  }, [courses.chapters]);
+  }, [auth?.token, courses?.id]);
 
   return (
     <div className="w-full flex flex-col lg:flex-row">
@@ -80,6 +80,7 @@ const CoursesVideoPage = ({ params }: { params: { coursesId: string } }) => {
 
       <ChapterSidebar
         courses={courses}
+        setCourses={setCourses}
         setPreviewCover={setPreviewCover}
         previewCover={previewCover}
         setTrackings={setTrackings}

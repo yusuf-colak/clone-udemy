@@ -85,17 +85,17 @@ const ChapterPage = ({
   }, [previewCover]);
 
   useEffect(() => {
+    // video izlenme süresni 10 saniyede bir sunucuya kaydet
     const videoElement = document.getElementById('chapterVideo');
 
     if (videoElement) {
       setCurrentTimeInterval(
         setInterval(() => {
-          // Check if the video is playing before updating currentTime
           if (!videoElement.paused) {
             const currentTime = videoElement.currentTime;
             setIsCurrentTime(currentTime);
           }
-        }, 10000) // Update every 10 seconds
+        }, 10000)
       );
     }
 
@@ -103,8 +103,6 @@ const ChapterPage = ({
       if (videoElement) {
         videoElement.removeEventListener('loadedmetadata', () => {});
       }
-
-      // Clear the interval when the component is unmounted or video changes
       clearInterval(currentTimeInterval);
     };
   }, [chapter]);
@@ -191,11 +189,15 @@ const ChapterPage = ({
   }, [isWatched]);
 
   useEffect(() => {
-    // Sayfa yüklendiğinde videonun 30. saniyesine git
-    if (videoRef.current && previewCover) {
-      videoRef.current.currentTime = 30;
+    const trackingFull = trackings?.filter(
+      (tracking) => tracking.chapterId === previewCover
+    )[0];
+    const trackingTime = trackingFull?.isTime;
+    // Sayfa yüklendiğinde videonun hangi sayiyede kaldıysa saniyesine git
+    if (videoRef.current && previewCover && trackingTime) {
+      videoRef.current.currentTime = trackingTime;
     }
-  }, [previewCover]);
+  }, [previewCover, chapter]);
   return (
     <div className="w-full p-5">
       <h2 className="lg:text-2xl text-xl font-semibold text-blue-950">
@@ -209,7 +211,6 @@ const ChapterPage = ({
               id="chapterVideo"
               controls
               src={chapter?.videoUrl}
-              autoPlay
               onTimeUpdate={handleTimeUpdate}
               className="lg:w-11/12 w-full"
               ref={videoRef}

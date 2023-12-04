@@ -89,6 +89,7 @@ export class TrackingsService {
     const trackings = await this.prisma.tracking.findMany({
       where: {
         userId,
+        isCompleted: true,
         course: {
           isPublished: true,
         },

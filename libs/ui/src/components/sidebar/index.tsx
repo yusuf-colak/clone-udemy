@@ -71,15 +71,15 @@ export default function Sidebar() {
     }
   }, [auth?.token]);
   const guestRoutes = [
-    {
-      title: 'Dashboard',
-      icon: LayoutDashboard,
-      href: '/',
-    },
+    // {
+    //   title: 'Dashboard',
+    //   icon: LayoutDashboard,
+    //   href: '/',
+    // },
     {
       title: 'Kurslar',
       icon: Compass,
-      href: '/courses',
+      href: '/',
     },
     {
       title: 'Girişler',

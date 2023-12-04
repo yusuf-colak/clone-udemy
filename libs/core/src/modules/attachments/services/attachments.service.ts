@@ -24,6 +24,12 @@ export class AttachmentsService {
     });
   }
 
+  async findByChapterId(chapterId: string): Promise<Attachment[]> {
+    return this.prisma.attachment.findMany({
+      where: { chapterId },
+    });
+  }
+  
   async update(id: string, data: UpdateAttachmentDto): Promise<Attachment> {
     return this.prisma.attachment.update({
       where: { id },

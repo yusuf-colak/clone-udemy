@@ -80,7 +80,7 @@ const CoursesEditPage = () => {
               <CardTitle className="flex justify-between items-center">
                 <Link
                   className="hover:cursor-pointer"
-                  href={`/courses/${course.id}`}
+                  href={`/${course.id}`}
                 >
                   <TooltipProvider>
                     <Tooltip>
@@ -117,7 +117,7 @@ const CoursesEditPage = () => {
             <CardContent>
               <Link
                 className="hover:cursor-pointer"
-                href={`/courses/${course.id}`}
+                href={`/${course.id}`}
               >
                 {course.imageUrl ? (
                   <img
