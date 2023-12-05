@@ -128,13 +128,13 @@ const UserAddPage = () => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button className="border shadow-md hover:shadow-lg" variant="ghost">
-          Kullanıcı Ekle
+          {/* Kullanıcı Ekle */}Benutzer hinzufügen
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="flex justify-between items-center">
-            Kullanıcı Ekle
+            {/* Kullanıcı Ekle */}Benutzer hinzufügen
             <AlertDialogCancel className="rounded-full p-2">
               <X />
             </AlertDialogCancel>
@@ -146,9 +146,9 @@ const UserAddPage = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>İsim</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="İsim" {...field} />
+                      <Input placeholder="Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -172,9 +172,13 @@ const UserAddPage = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Şifre</FormLabel>
+                    <FormLabel>Passwort</FormLabel>
                     <FormControl>
-                      <Input placeholder="Şifre" type="password" {...field} />
+                      <Input
+                        placeholder="Passwort"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -185,14 +189,14 @@ const UserAddPage = () => {
                 name="roleId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Rol Seçiniz</FormLabel>
+                    <FormLabel>Wählen Sie Rolle aus</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Lütfen Rol Seçiniz" />
+                          <SelectValue placeholder="Wählen Sie Rolle aus" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -209,7 +213,7 @@ const UserAddPage = () => {
                 )}
               />
               <Button className="flex w-full border" type="submit">
-                Kullanıcıyı Ekle
+                {/* Kullanıcıyı Ekle */}Benutzer hinzufügen
               </Button>
             </form>
           </Form>

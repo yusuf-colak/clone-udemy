@@ -105,7 +105,7 @@ export function DataTableComps<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center "
                 >
-                  Kurslar Bulunamadı...
+                  Benutzer nicht gefunden...
                 </TableCell>
               </TableRow>
             )}

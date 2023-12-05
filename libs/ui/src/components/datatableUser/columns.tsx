@@ -47,24 +47,29 @@ export const columns: ColumnDef<Payment>[] = [
           variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Kullanıcılar <ArrowUpDown className="ml-2 h-4 w-4" />
+          {/* Kullanıcılar  */}
+          Benutzer
+          <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
     accessorKey: 'email',
-    header: 'Mail Adresi',
+    header: 'E-Mail-Adresse',
   },
   {
-    header: () => <div>Rol Drumumu</div>,
-    accessorKey: 'roleıd',
-    cell: ({ row }) => (
-      <div >{row.original.roleName}</div>
+    header: () => (
+      <div>
+        {/* Rol Drumumu */}
+        Rolle
+      </div>
     ),
+    accessorKey: 'roleıd',
+    cell: ({ row }) => <div>{row.original.roleName}</div>,
   },
   {
-    header: () => <div className="flex justify-end">Düzenle / Sil</div>,
+    header: () => <div className="flex justify-end">Bearbeiten / Löschen</div>,
     accessorKey: 'About1',
     cell: ({ row }) => (
       <div className="flex flex-row justify-end  ">

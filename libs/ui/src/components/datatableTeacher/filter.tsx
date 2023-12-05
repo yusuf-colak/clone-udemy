@@ -15,7 +15,7 @@ const Filter = ({ table, columns, categories }) => {
         <Search size={22} />
         <input
           className="flex  ml-1 bg-background text-md ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-          placeholder={`Kursları Filtrele...`}
+          placeholder={`Kurse filtern...`}
           value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn('title')?.setFilterValue(event.target.value)
@@ -31,10 +31,10 @@ const Filter = ({ table, columns, categories }) => {
         }}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Tüm Kategoriler" />
+          <SelectValue placeholder="Alle Kategorien" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem>Tüm Kategoriler</SelectItem>
+          <SelectItem>Alle Kategorien</SelectItem>
           {categories?.map((category) => (
             <SelectItem value={`${category.name}`} key={category.id}>
               {category.name}

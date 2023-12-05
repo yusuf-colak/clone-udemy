@@ -77,12 +77,12 @@ export default function Sidebar() {
     //   href: '/',
     // },
     {
-      title: 'Kurslar',
+      title: 'Kurse',
       icon: Compass,
       href: '/',
     },
     {
-      title: 'Girişler',
+      title: 'Eingänge',
       icon: Newspaper,
       href: '/entries',
       locked: !completeCourse,
@@ -91,17 +91,17 @@ export default function Sidebar() {
 
   const teacherRoutes = [
     {
-      title: 'Kurslar',
+      title: 'Kurse',
       icon: List,
       href: '/teacher/coursesTable',
     },
     {
-      title: 'Yeni Kurs Ekle',
+      title: 'Neuen Kurs hinzufügen',
       icon: Plus,
       href: '/teacher/addCourse',
     },
     {
-      title: 'Kullanıcılar',
+      title: 'Benutzer',
       icon: Users,
       href: '/teacher/users',
     },

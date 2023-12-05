@@ -149,7 +149,8 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="flex justify-between items-center">
-            Kullanıcı Güncelle
+            {/* Kullanıcı Güncelle */}
+            Benutzer aktualisieren
             <AlertDialogCancel className="rounded-full p-2">
               <X />
             </AlertDialogCancel>
@@ -161,9 +162,9 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>İsim</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="İsim" {...field} />
+                      <Input placeholder="Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -187,9 +188,13 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Şifre</FormLabel>
+                    <FormLabel>Passwort</FormLabel>
                     <FormControl>
-                      <Input placeholder="Şifre" type="password" {...field} />
+                      <Input
+                        placeholder="Passwort"
+                        type="password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -200,14 +205,14 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
                 name="roleId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Rol Seçiniz</FormLabel>
+                    <FormLabel>Wählen Sie Rolle aus</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Lütfen Rol Seçiniz" />
+                          <SelectValue placeholder="Wählen Sie Rolle aus" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -224,7 +229,8 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
                 )}
               />
               <Button className="flex w-full border" type="submit">
-                Kullanıcıyı Güncelle
+                {/* Kullanıcıyı Güncelle */}
+                Benutzer aktualisieren
               </Button>
             </form>
           </Form>

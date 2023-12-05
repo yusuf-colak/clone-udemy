@@ -164,19 +164,20 @@ const AttachmentChapter = ({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Dosyalar
+        {/* Dosyalar */}
+        Ordner
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>İptal</>}
+          {isEditing && <>{/* İptal */} Abbrechen</>}
           {!isEditing && !chapter.imageUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Dosya Ekle
+              {/* Dosya Ekle */}Datei hinzufügen
             </>
           )}
           {!isEditing && chapter.imageUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Dosya Düzenle
+              {/* Dosya Düzenle */}Datei bearbeiten
             </>
           )}
         </Button>
@@ -209,7 +210,7 @@ const AttachmentChapter = ({
                                 <FormControl>
                                   <Input
                                     disabled={isSubmitting}
-                                    placeholder="e.g. 'Advanced web development'"
+                                    placeholder=""
                                     {...field}
                                   />
                                 </FormControl>
@@ -222,7 +223,7 @@ const AttachmentChapter = ({
                               disabled={!isValid || isSubmitting}
                               type="submit"
                             >
-                              Kaydet
+                              {/* Kaydet */} Speichern
                             </Button>
                           </div>
                         </form>
@@ -251,7 +252,10 @@ const AttachmentChapter = ({
           </div>
         ))}
       {chapter?.attachments.length < 1 && (
-        <div className="text-slate-500 text-sm">Dosya bulunamadı...</div>
+        <div className="text-slate-500 text-sm">
+          {/* Dosya bulunamadı... */}
+          Datei nicht gefunden...
+        </div>
       )}
       {isEditing && (
         <div>

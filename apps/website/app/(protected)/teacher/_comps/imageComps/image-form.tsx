@@ -74,19 +74,22 @@ export const ImageForm = ({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Kurs resmi
+        {/* Kurs resmi */}
+        Kursbild
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>İptal</>}
+          {isEditing && <>{/* İptal */} Abbrechen</>}
           {!isEditing && !courseData.imageUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Resim Ekle
+              {/* Resim Ekle */}
+              Bild hinzufügen
             </>
           )}
           {!isEditing && courseData.imageUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Resimi Düzenle
+              {/* Resimi Düzenle */}
+              Bearbeiten
             </>
           )}
         </Button>

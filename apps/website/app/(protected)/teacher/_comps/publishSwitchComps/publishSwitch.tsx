@@ -37,7 +37,8 @@ const PublishSwitch = ({
         ...current,
         isPublished: updatedIsPublished,
       }));
-      toast.success('Kurs paylaşım durumu güncellendi');
+      // toast.success('Kurs paylaşım durumu güncellendi');
+      toast.success('Der Status der Kursfreigabe wurde aktualisiert');
     } catch {
       console.error('Error updating course data');
     }
@@ -45,7 +46,8 @@ const PublishSwitch = ({
 
   return (
     <div className="flex flex-row items-center">
-      Paylaşıma {courseData?.isPublished ? 'açık' : 'kapalı'}
+      {/* Paylaşıma {courseData?.isPublished ? 'açık' : 'kapalı'} */}
+      Rundfunk {courseData?.isPublished ? 'offen' : 'geschlossen'}
       <Switch
         defaultChecked={courseData?.isPublished}
         onClick={onSubmit}

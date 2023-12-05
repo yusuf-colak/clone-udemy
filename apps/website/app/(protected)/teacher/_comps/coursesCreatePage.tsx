@@ -86,7 +86,7 @@ const CreateCoursesPage = () => {
           <div className="flex items-center gap-x-2">
             <Link href="/">
               <Button type="button" variant="ghost">
-                İptal
+                {/* İptal */} Abbrechen
               </Button>
             </Link>
             <Button type="submit" disabled={!isValid || isSubmitting}>

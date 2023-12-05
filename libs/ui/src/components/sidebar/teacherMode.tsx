@@ -21,13 +21,16 @@ const TeacherMode = () => {
           {isTeacherPage || isPlayerPage ? (
             <Link href="/" className="flex flex-row">
               <Button className="w-full border" variant="ghost" size="sm">
-                <LogOut className="h-4 w-4 mr-2" /> Öğretmen Modundan Çık
+                <LogOut className="h-4 w-4 mr-2" />
+                {/* Öğretmen Modundan Çık */}
+                Administrationsmenü schließen
               </Button>
             </Link>
           ) : (
             <Link href="/teacher/coursesTable">
               <Button className="w-full border" variant="ghost" size="sm">
-                Öğretmen Paneli
+                {/* Öğretmen Paneli */}
+                Verwaltungsmenü
               </Button>
             </Link>
           )}

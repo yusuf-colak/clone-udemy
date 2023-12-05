@@ -118,7 +118,7 @@ const ChapterSidebar = ({
     <div className="flex flex-col gap-y-10  h-full   ">
       <div className=" p-2">
         <h2 className="text-xl font-medium text-blue-950 border-b-2 border-blue-950 mb-2">
-          Kurs videoları
+          {/* Kurs videoları */}Kursvideos
         </h2>
         <ScrollArea className=" h-[400px]  w-full  ">
           {courses.chapters?.map((chapter, index) => (
@@ -184,7 +184,7 @@ const ChapterSidebar = ({
       {courses.attachments && courses.attachments.length > 0 && (
         <div className=" p-2">
           <div className="text-xl text-black font-semibold border-b-2 border-black ">
-            Video Dosyaları
+            {/* Video Dosyaları */}Videodateien
           </div>
           <ScrollArea className=" h-[200px] w-full ">
             {isChapterAttachment?.map((attachment) => (
@@ -200,7 +200,7 @@ const ChapterSidebar = ({
       {courses.attachments && courses.attachments.length > 0 && (
         <div className=" p-2">
           <div className="text-xl text-black font-semibold border-b-2 border-black ">
-            Kurs Dosyaları
+            {/* Kurs Dosyaları */}Kursdateien
           </div>
           <ScrollArea className=" h-[200px] w-full ">
             {courses.attachments?.map((attachment) => (

@@ -43,12 +43,13 @@ const CourseDeleteButton = ({ courseId, setCourses }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Kursu silmek istediğinize emin misiniz ?
+            {/* Kursu silmek istediğinize emin misiniz ? */}
+            Sind Sie sicher, dass Sie den Kurs löschen möchten?
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>İptal</AlertDialogCancel>
-          <AlertDialogAction onClick={DeleteCourse}>Evet</AlertDialogAction>
+          <AlertDialogCancel>{/* İptal */} Abbrechen</AlertDialogCancel>
+          <AlertDialogAction onClick={DeleteCourse}>Ja</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

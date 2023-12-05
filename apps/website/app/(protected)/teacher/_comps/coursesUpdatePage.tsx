@@ -69,9 +69,12 @@ const CoursesUpdatePage = ({ params }) => {
         <main className="lg:p-6 p-2">
           <div className="flex  items-center justify-between">
             <div className="flex flex-col gap-y-2">
-              <h1 className="text-2xl font-medium">Kurs kurulumu</h1>
+              <h1 className="text-2xl font-medium">
+                {/* Kurs kurulumu */}
+                Kursaufbau
+              </h1>
               <span className="text-sm text-slate-700">
-                Tüm alanları tamamlayın ({completedFields}/{totalFields})
+                Füllen Sie alle Felder aus ({completedFields}/{totalFields})
               </span>
             </div>
             <PublishSwitch
@@ -87,7 +90,7 @@ const CoursesUpdatePage = ({ params }) => {
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={LayoutDashboard} />
-                <h2 className="text-xl">Kursunuzu özelleştirin</h2>
+                <h2 className="text-xl">Passen Sie Ihren Kurs an</h2>
               </div>
               <TitleFrom
                 courseData={courseData}
@@ -119,7 +122,7 @@ const CoursesUpdatePage = ({ params }) => {
               <div>
                 <div className="flex items-center gap-x-2">
                   <IconBadge icon={LayoutDashboard} />
-                  <h2 className="text-xl">Video ve Dosyaları Düzenleyin</h2>
+                  <h2 className="text-xl">Bearbeiten Sie Videos und Dateien</h2>
                 </div>
                 <ChaptersForm
                   setCourseData={setCourseData}

@@ -69,14 +69,15 @@ const TitleFrom = ({ courseData, courseId, setCourseData }: TitleFromProps) => {
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Kurs başlığı
+        {/* Kurs başlığı */}
+        Kursname
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>İptal</>
+            <>{/* İptal */} Abbrechen</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Başlığı düzenle
+              {/* Başlığı düzenle */} Titel bearbeiten
             </>
           )}
         </Button>
@@ -96,7 +97,7 @@ const TitleFrom = ({ courseData, courseId, setCourseData }: TitleFromProps) => {
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="Başlık giriniz"
+                      placeholder="Titel eingeben"
                       {...field}
                     />
                   </FormControl>
@@ -106,7 +107,7 @@ const TitleFrom = ({ courseData, courseId, setCourseData }: TitleFromProps) => {
             />
             <div className="flex items-center gap-x-2">
               <Button disabled={!isValid || isSubmitting} type="submit">
-                kaydet
+                {/* Kaydet */} Speichern
               </Button>
             </div>
           </form>

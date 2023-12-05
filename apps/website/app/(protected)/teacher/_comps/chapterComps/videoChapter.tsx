@@ -103,19 +103,19 @@ export const VideoChapterEdit = ({ chapter, setChapters }: ImageFormProps) => {
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Video Yükle
+        {/* Video Yükle */}Video hochladen
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>İptal</>}
+          {isEditing && <>{/* İptal */} Abbrechen</>}
           {!isEditing && !chapter.videoUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Video Ekle
+              {/* Video Ekle */}Video hinzufügen
             </>
           )}
           {!isEditing && chapter.videoUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Video Düzenle
+              Video bearbeiten
             </>
           )}
         </Button>

@@ -68,14 +68,15 @@ const TitleChapterEdit = ({ chapter, setChapters }: TitleFromProps) => {
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Video Başlığı
+        {/* Video Başlığı */}
+        Videotitel
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>İptal</>
+            <>{/* İptal */} Abbrechen</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Başlığı Düzenle
+              {/* Başlığı düzenle */} Titel bearbeiten
             </>
           )}
         </Button>
@@ -95,7 +96,8 @@ const TitleChapterEdit = ({ chapter, setChapters }: TitleFromProps) => {
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Advanced web development'"
+                      placeholder="Geben Sie den Videotitel ein
+                      "
                       {...field}
                     />
                   </FormControl>
@@ -105,7 +107,7 @@ const TitleChapterEdit = ({ chapter, setChapters }: TitleFromProps) => {
             />
             <div className="flex items-center gap-x-2">
               <Button disabled={!isValid || isSubmitting} type="submit">
-                Kaydet
+                {/* Kaydet */} Speichern
               </Button>
             </div>
           </form>

@@ -224,7 +224,7 @@ const ChapterPage = ({
       )}
 
       <p>
-        <span>Video Açıklaması: </span> {chapter?.description}
+        <span>Videobeschreibung: </span> {chapter?.description}
       </p>
     </div>
   );

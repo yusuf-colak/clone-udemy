@@ -52,7 +52,7 @@ const AttachmentDelete = (
         <AlertDialogContent>
           Silmek istediğinize eminmisiniz ?
           <AlertDialogFooter>
-            <AlertDialogCancel>İptal</AlertDialogCancel>
+            <AlertDialogCancel>{/* İptal */} Abbrechen</AlertDialogCancel>
             <AlertDialogAction onClick={onSubmit}>Onayla</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

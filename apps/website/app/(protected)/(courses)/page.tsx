@@ -134,12 +134,12 @@ const CoursesPage = () => {
               </div>
               <div className="flex flex-col justify-between h-[320px] p-5 pt-3 gap-y-3 ">
                 <h2 className="text-blue-950 text-3xl"> {course.title}</h2>
-                <ScrollArea className=" border-0 h-[110px] w-[350px] rounded-md   text-xs text-blue-900">
+                <ScrollArea className=" border-0 h-[110px] min-w-[250px]  rounded-md   text-xs text-blue-900">
                   {course.description}
                 </ScrollArea>
                 <div>
                   <span className="mb-2 text-blue-800 flex flex-row flex-nowrap gap-x-1">
-                    <Book /> {course.chapters?.length} ders{' '}
+                    <Book /> {course.chapters?.length} Lektion Ders{' '}
                     {trackings.map((tracking: any) => {
                       if (
                         tracking.courseId === course.id &&
@@ -155,16 +155,14 @@ const CoursesPage = () => {
                       }
                     })}
                   </span>
-                  <Link
-                    className="hover:cursor-pointer"
-                    href={`/${course.id}`}
-                  >
+                  <Link className="hover:cursor-pointer" href={`/${course.id}`}>
                     <Button
                       size="custom"
                       variant="custom"
                       className="  flex w-full"
                     >
-                      Kursa Katıl
+                      {/* Kursa Katıl */}
+                      Nehmen Sie am Kurs teil
                     </Button>
                   </Link>
                 </div>

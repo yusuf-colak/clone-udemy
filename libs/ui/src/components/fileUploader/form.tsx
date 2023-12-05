@@ -82,7 +82,9 @@ export default function UploaderForm({
           />
           <div className="mt-4 flex text-sm text-center  leading-6 text-gray-600">
             <span className=" font-semibold w-full text-center  ">
-              {multiple ? 'Dosyaları' : 'Dosyayı'} seç veya sürükle bırak.
+              {/* {multiple ? 'Dosyaları' : 'Dosyayı'} seç veya sürükle bırak. */}
+              {multiple ? 'Dateien' : 'Datei'} auswählen oder per Drag & Drop
+              verschieben.
             </span>
           </div>
           <p className="text-xs leading-5 text-gray-600">Max 2GB</p>

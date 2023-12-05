@@ -71,14 +71,15 @@ const DescriptionChapterEdit = ({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Video Açıklaması
+        Videobeschreibung
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>İptal</>
+            <>{/* İptal */} Abbrechen</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2 " />
-              Açıklamayı Düzenle
+              {/* Açıklamayı Düzenle */}
+              Bearbeiten
             </>
           )}
         </Button>
@@ -98,7 +99,7 @@ const DescriptionChapterEdit = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Advanced web development'"
+                      placeholder="Beschreibung eingeben"
                       {...field}
                     />
                   </FormControl>
@@ -108,7 +109,7 @@ const DescriptionChapterEdit = ({
             />
             <div className="flex items-center gap-x-2">
               <Button disabled={!isValid || isSubmitting} type="submit">
-                Kaydet
+                {/* Kaydet */} Speichern
               </Button>
             </div>
           </form>

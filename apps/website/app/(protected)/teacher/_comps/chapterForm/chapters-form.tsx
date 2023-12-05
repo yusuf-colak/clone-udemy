@@ -109,6 +109,7 @@ export const ChaptersForm = ({
         (a, b) => a.position - b.position
       );
       setChapters(sortedChapters);
+      form.reset();
       toast.success('Video başarıyla oluşturuldu. Lütfen düzenleme yapın...');
       toggleCreating();
       router.refresh();
@@ -159,14 +160,15 @@ export const ChaptersForm = ({
         </div>
       )}
       <div className="font-medium flex items-center justify-between">
-        Kurs videoları
+        {/* Kurs videoları */}Kursvideos
         <Button onClick={toggleCreating} variant="ghost">
           {isCreating ? (
-            <>İptal</>
+            <>{/* İptal */} Abbrechen</>
           ) : (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Video Ekle
+              {/* Video Ekle */}
+              Video hinzufügen
             </>
           )}
         </Button>
@@ -185,7 +187,7 @@ export const ChaptersForm = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="Video Adı"
+                      placeholder="Videoname"
                       {...field}
                     />
                   </FormControl>
@@ -194,7 +196,7 @@ export const ChaptersForm = ({
               )}
             />
             <Button disabled={!isValid || isSubmitting} type="submit">
-              Ekle
+              {/* Ekle */}Hinzufügen
             </Button>
           </form>
         </Form>
@@ -217,7 +219,8 @@ export const ChaptersForm = ({
       )}
       {!isCreating && (
         <p className="text-xs text-muted-foreground mt-4">
-          Videoları yeniden sıralamak için sürükleyip bırakın
+          {/* Videoları yeniden sıralamak için sürükleyip bırakın */}
+          Per Drag-and-Drop können Sie Videos neu anordnen
         </p>
       )}
     </div>

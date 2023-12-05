@@ -25,7 +25,7 @@ export default function Datatable() {
         }
       );
 
-      setCategories(responseCategories.data); // Kategorileri state'e kaydet
+      setCategories(responseCategories.data);
 
       // Kursları çek
       const responseCourses = await axios.get(

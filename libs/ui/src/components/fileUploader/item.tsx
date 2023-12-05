@@ -78,7 +78,7 @@ export default function UploadItem({
             </div>
           ) : (
             <span className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-red-400 shadow-sm ring-1 ring-inset ring-red-300">
-              İptal Et
+              {/* İptal */} Abbrechen Et
             </span>
           )
         ) : (

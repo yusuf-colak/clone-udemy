@@ -57,7 +57,7 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
-    header: () => <div>Yayınlanma durumu </div>,
+    header: () => <div>Situation</div>,
     accessorKey: 'isPublished',
     cell: ({ row }) => (
       <div className="flex flex-row flex-nowrap items-center ">
@@ -70,17 +70,19 @@ export const columns: ColumnDef<Payment>[] = [
         </div>
 
         <div className="pl-1">
-          {row.original.isPublished ? 'Yayında ' : 'Yayında değil'}
+          {row.original.isPublished ? 'Offen zum Teilen ' : 'Nicht geteilt'}
         </div>
       </div>
     ),
   },
   {
     accessorKey: 'categoryName',
-    header: 'Kategori',
+    header: 'Kategorie',
   },
   {
-    header: () => <div className="flex justify-end mr-6">Düzenle / Sil</div>,
+    header: () => (
+      <div className="flex justify-end mr-6">Bearbeiten / Löschen</div>
+    ),
     accessorKey: 'About1',
     cell: ({ row }) => (
       <div className="flex flex-row justify-end  ">

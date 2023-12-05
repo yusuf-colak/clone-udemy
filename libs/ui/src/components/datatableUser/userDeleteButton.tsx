@@ -43,18 +43,19 @@ const CourseDeleteButton = ({ userId, userName, mail }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Kullanıcıyı silmek istediğinize emin misiniz ?
+            {/* Kullanıcıyı silmek istediğinize emin misiniz ? */}
+            Sind Sie sicher, dass Sie den Benutzer löschen möchten?
           </AlertDialogTitle>
           <AlertDialogDescription>
             <div className="flex flex-col">
-              <div className="font-semibold text-lg">Adı: {userName}</div>
-              <div className="text-sm">Mail Adresi: {mail}</div>
+              <div className="font-semibold text-lg">Name: {userName}</div>
+              <div className="text-sm">E-Mail-Adresse: {mail}</div>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>İptal</AlertDialogCancel>
-          <AlertDialogAction onClick={DeleteCourse}>Evet</AlertDialogAction>
+          <AlertDialogCancel>{/* İptal */} Abbrechen</AlertDialogCancel>
+          <AlertDialogAction onClick={DeleteCourse}>Ja</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

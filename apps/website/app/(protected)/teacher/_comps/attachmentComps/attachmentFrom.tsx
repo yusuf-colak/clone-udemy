@@ -149,19 +149,21 @@ export const AttachmentForm = ({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Dosyalar
+        {/* Dosyalar */}Ordner
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>İptal</>}
+          {isEditing && <>{/* İptal */} Abbrechen</>}
           {!isEditing && !courseData.imageUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Dosya Ekle
+              {/* Dosya Ekle */}
+              Datei hinzufügen
             </>
           )}
           {!isEditing && courseData.imageUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Dosya Düzenle
+              {/* Dosya Düzenle */}
+              Datei bearbeitens
             </>
           )}
         </Button>
@@ -193,7 +195,7 @@ export const AttachmentForm = ({
                               <FormControl>
                                 <Input
                                   disabled={isSubmitting}
-                                  placeholder="e.g. 'Advanced web development'"
+                                  placeholder=""
                                   {...field}
                                 />
                               </FormControl>
@@ -206,7 +208,7 @@ export const AttachmentForm = ({
                             disabled={!isValid || isSubmitting}
                             type="submit"
                           >
-                            Kaydet
+                            {/* Kaydet */} Speichern
                           </Button>
                         </div>
                       </form>
@@ -234,7 +236,10 @@ export const AttachmentForm = ({
           </div>
         ))}
       {courseData?.attachments.length < 1 && (
-        <div className="text-slate-500 text-sm">Dosya bulunamadı...</div>
+        <div className="text-slate-500 text-sm">
+          {/* Dosya bulunamadı... */}
+          Datei nicht gefunden...
+        </div>
       )}
 
       {isEditing && (
