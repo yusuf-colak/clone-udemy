@@ -96,7 +96,7 @@ export default function Sidebar() {
       href: '/teacher/coursesTable',
     },
     {
-      title: 'Neuen Kurs hinzufügen',
+      title: 'Kurs hinzufügen',
       icon: Plus,
       href: '/teacher/addCourse',
     },
