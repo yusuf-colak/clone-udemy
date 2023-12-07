@@ -7,14 +7,21 @@ import * as bcrypt from 'bcrypt';
 export class AuthService {
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
-  async validateUser(domainUrl: string, email: string, passwordInput: string): Promise<any> {
+  async validateUser(
+    domainUrl: string,
+    email: string,
+    passwordInput: string
+  ): Promise<any> {
     const user: any = await this.usersService.findUserByEmail(email);
 
     if (user) {
-      const isPasswordValid = await bcrypt.compare(passwordInput, user.password);
+      const isPasswordValid = await bcrypt.compare(
+        passwordInput,
+        user.password
+      );
       if (isPasswordValid) {
         if (user.roles.some((role) => role.role.name === 'Superadmin')) {
           const { password, ...result } = user;
@@ -43,6 +50,4 @@ export class AuthService {
   async me(id: string) {
     return await this.usersService.findOne(id);
   }
-
-
 }

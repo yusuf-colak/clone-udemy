@@ -71,7 +71,6 @@ export const ChaptersList = ({
   if (!isMounted) {
     return null;
   }
-  console.log('chapters', chapters);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chapters">

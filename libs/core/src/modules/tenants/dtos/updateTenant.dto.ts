@@ -3,4 +3,5 @@ import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
 export class UpdateTenantDto {
   @ApiProperty({ example: 'test' })
   name?: string;
+  
 }

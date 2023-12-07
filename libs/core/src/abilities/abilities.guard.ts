@@ -1,19 +1,24 @@
-import {User} from '@prisma/client';
-import {Reflector} from '@nestjs/core';
+import { User } from '@prisma/client';
+import { Reflector } from '@nestjs/core';
 
-import {CHECK_ABILITY, RequiredRule} from './abilities.decorator';
+import { CHECK_ABILITY, RequiredRule } from './abilities.decorator';
 
 import {
   createMongoAbility,
   ForbiddenError,
   MongoAbility,
   RawRuleOf,
-  subject
+  subject,
 } from '@casl/ability';
 
-import {CanActivate, ExecutionContext, ForbiddenException, Injectable, NotFoundException} from '@nestjs/common';
-import {PrismaService} from "@/core/prisma";
-
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { PrismaService } from '@/core/prisma';
 
 export type AppAbility = MongoAbility;
 
@@ -32,11 +37,11 @@ export class AbilitiesGuard implements CanActivate {
           include: {
             permissions: {
               include: {
-                permission: true
-              }
-            }
-          }
-        }
+                permission: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -52,11 +57,11 @@ export class AbilitiesGuard implements CanActivate {
           include: {
             permissions: {
               include: {
-                permission: true
-              }
-            }
-          }
-        }
+                permission: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -82,13 +87,14 @@ export class AbilitiesGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const rules: any =
-      this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) || [];
+      this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||
+      [];
     const currentUser = context.switchToHttp().getRequest().user;
 
     const userPermissions = await this.getUserPermissions(currentUser.id);
 
-    if(await this.isSuperadmin(currentUser.id)) {
-        return true;
+    if (await this.isSuperadmin(currentUser.id)) {
+      return true;
     }
 
     try {

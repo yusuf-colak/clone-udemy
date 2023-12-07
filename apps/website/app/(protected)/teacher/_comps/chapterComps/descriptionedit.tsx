@@ -61,10 +61,10 @@ const DescriptionChapterEdit = ({
         newChapters[index] = { ...current[index], ...values };
         return newChapters;
       });
-      toast.success('Video açıklaması başarıyla güncellendi');
+      toast.success('Videobeschreibung erfolgreich aktualisiert');
       toggleEdit();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 

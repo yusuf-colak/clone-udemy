@@ -88,7 +88,6 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
           }
         );
         setRoles(response.data);
-        console.log(response.data);
       }
     };
     fetchRoles();
@@ -130,10 +129,10 @@ const UserEditPage = ({ userId, userName, mail, roleId }) => {
       );
 
       window.location.reload();
-      toast.success('Kullanıcı başarıyla güncellendi.');
+      toast.success('Der Benutzer wurde erfolgreich aktualisiert.');
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        toast.error('E-posta adresi zaten kullanılıyor.');
+        toast.error('Die E-Mail-Adresse ist bereits vergeben.');
       } else {
         console.error('Bir hata oluştu:', error);
       }

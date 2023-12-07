@@ -79,7 +79,6 @@ const UserAddPage = () => {
           }
         );
         setRoles(response.data);
-        console.log(response.data);
       }
     };
     fetchRoles();
@@ -92,6 +91,7 @@ const UserAddPage = () => {
           name: values.name,
           email: values.email,
           password: values.password,
+          tenantId: auth?.user?.tenantId,
         },
         {
           headers: {
@@ -114,15 +114,14 @@ const UserAddPage = () => {
         }
       );
       form.reset();
-      toast.success('Kullanıcı başarıyla oluşturuldu.');
+      toast.success('Der Benutzer wurde erfolgreich erstellt.');
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        toast.error('E-posta adresi zaten kullanılıyor.');
+        toast.error('Die E-Mail-Adresse ist bereits vergeben.');
       } else {
         console.error('Bir hata oluştu:', error);
       }
     }
-    console.log(values);
   };
   return (
     <AlertDialog>

@@ -110,11 +110,13 @@ export const ChaptersForm = ({
       );
       setChapters(sortedChapters);
       form.reset();
-      toast.success('Video başarıyla oluşturuldu. Lütfen düzenleme yapın...');
+      toast.success(
+        'Das Video wurde erfolgreich erstellt. Bitte bearbeiten... '
+      );
       toggleCreating();
       router.refresh();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 
@@ -139,10 +141,10 @@ export const ChaptersForm = ({
         })
       );
       form.reset();
-      toast.success('Sıralama başarıyla güncellendi');
+      toast.success('Ranking erfolgreich aktualisiert');
       router.refresh();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     } finally {
       setIsUpdating(false);
     }

@@ -36,13 +36,12 @@ const ChapterDelete = ({ chapter, setChapters }) => {
             ...item,
             position: index,
           }));
-        console.log(updatedChapters);
         return updatedChapters;
       });
 
-      toast.success('Başarıyla silindi');
+      toast.success('Erfolgreich gelöscht');
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 

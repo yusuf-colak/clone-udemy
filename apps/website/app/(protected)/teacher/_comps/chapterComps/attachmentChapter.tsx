@@ -76,7 +76,6 @@ const AttachmentChapter = ({
             },
           }
         );
-        console.log(responsePost.data);
         setChapters((chapters: any) => {
           const index = chapters.findIndex(
             (item: any) => item.id === chapter.id
@@ -93,11 +92,11 @@ const AttachmentChapter = ({
         });
       } catch (error) {
         console.error('Error uploading file:', error);
-        toast.error('Dosya yüklenirken bir hata oluştu');
+        toast.error('Beim Hochladen der Datei ist ein Fehler aufgetreten');
       }
     }
 
-    toast.success('Dosya başarıyla yüklendi');
+    toast.success('Datei erfolgreich hochgeladen');
     toggleEdit();
     router.refresh();
   };
@@ -139,11 +138,11 @@ const AttachmentChapter = ({
         return updatedChapters;
       });
       setFileNamesEdit(null);
-      toast.success('Başarıyla güncellendi');
+      toast.success('Erfolgreich geupdated');
       toggleEdit();
       setIsEditing(false);
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
   const handleDownload = (attachment) => {

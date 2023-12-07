@@ -58,10 +58,10 @@ const TitleChapterEdit = ({ chapter, setChapters }: TitleFromProps) => {
         newChapters[index] = { ...current[index], ...values };
         return newChapters;
       });
-      toast.success('Video başlığı başarıyla güncellendi...');
+      toast.success('Videotitel erfolgreich aktualisiert...');
       toggleEdit();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 

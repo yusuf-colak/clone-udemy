@@ -43,9 +43,9 @@ export const VideoChapterEdit = ({ chapter, setChapters }: ImageFormProps) => {
       const seconds = Math.round(duration % 60);
 
       if (hours > 0) {
-        return `${hours} sa ${minutes} dak`;
+        return `${hours} Stunde ${minutes} Minuten`;
       } else {
-        return `${minutes} dak ${seconds} san`;
+        return `${minutes} Minute ${seconds} Sekunden`;
       }
     };
 
@@ -73,11 +73,11 @@ export const VideoChapterEdit = ({ chapter, setChapters }: ImageFormProps) => {
         };
         return updatedChapters;
       });
-      toast.success('Video başarıyla yüklendi...');
+      toast.success('Video erfolgreich hochgeladen...');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 

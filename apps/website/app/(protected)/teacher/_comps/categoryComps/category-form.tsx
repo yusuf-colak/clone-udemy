@@ -64,11 +64,11 @@ export const CategoryForm = ({
         }
       );
       setCourseData((current) => ({ ...current, ...values }));
-      toast.success('Kategori başarıyla güncellendi');
+      toast.success('Kategorie erfolgreich aktualisiert');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 

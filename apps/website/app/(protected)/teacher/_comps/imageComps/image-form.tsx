@@ -55,11 +55,11 @@ export const ImageForm = ({
         }
       );
       setCourseData((current) => ({ ...current, ...response.data }));
-      toast.success('Resim başarıyla güncellendi');
+      toast.success('Bild erfolgreich aktualisiert');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Resim güncellenirken bir hata oluştu');
+      toast.error('Beim Aktualisieren des Bildes ist ein Fehler aufgetreten');
     }
   };
 

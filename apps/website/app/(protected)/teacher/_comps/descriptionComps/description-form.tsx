@@ -67,10 +67,10 @@ export const DescriptionForm = ({
       );
       setCourseData((current) => ({ ...current, ...values }));
 
-      toast.success('Kurs açıklaması başarıyla güncellendi...');
+      toast.success('Die Kursbeschreibung wurde erfolgreich aktualisiert...');
       toggleEdit();
     } catch {
-      toast.error('Bir hata oluştu');
+      toast.error('Etwas ist schief gelaufen');
     }
   };
 

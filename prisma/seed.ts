@@ -23,7 +23,7 @@ export const roles = [
   },
 ];
 
-function generatePermissions(subject: string) {
+function generateAdminPermissions(subject: string) {
   return [
     {
       id: randomUUID(),
@@ -53,12 +53,58 @@ function generatePermissions(subject: string) {
   ];
 }
 
+function generateUserPermissionsSorgu(subject: string) {
+  return [
+    {
+      id: randomUUID(),
+      action: 'manage',
+      subject,
+    },
+  ];
+}
+
+function generateUserPermissionsManageUpdate(subject: string) {
+  return [
+    {
+      id: randomUUID(),
+      action: 'manage',
+      subject,
+    },
+    {
+      id: randomUUID(),
+      action: 'create',
+      subject,
+    },
+    {
+      id: randomUUID(),
+      action: 'read',
+      subject,
+    },
+    {
+      id: randomUUID(),
+      action: 'update',
+      subject,
+    },
+  ];
+}
 export const permissions = [
-  ...generatePermissions('User'),
-  ...generatePermissions('Role'),
-  ...generatePermissions('Permission'),
-  ...generatePermissions('Tenant'),
-  ...generatePermissions('Domain'),
+  ...generateAdminPermissions('User'),
+  ...generateAdminPermissions('Role'),
+  ...generateAdminPermissions('Permission'),
+  ...generateAdminPermissions('RolesOnUsers'),
+  ...generateAdminPermissions('Tenant'),
+  ...generateAdminPermissions('Domain'),
+  ...generateAdminPermissions('Chapter'),
+  ...generateAdminPermissions('Role'),
+  ...generateAdminPermissions('Course'),
+  ...generateAdminPermissions('Category'),
+  ...generateAdminPermissions('Attachment'),
+  ...generateAdminPermissions('Tracking'),
+  ...generateUserPermissionsSorgu('Course'),
+  ...generateUserPermissionsSorgu('Chapter'),
+  ...generateUserPermissionsSorgu('Attachment'),
+  ...generateUserPermissionsSorgu('Category'),
+  ...generateUserPermissionsManageUpdate('Tracking'),
 ];
 
 async function generateUser(name: string, email: string, password: string) {
@@ -93,6 +139,7 @@ async function assignRoleToUser(email: string, roleId: string) {
           },
         },
       },
+      tenantId: tenantId,
     },
   });
 }
@@ -179,9 +226,21 @@ async function main() {
   await assignRoleToUser('user@microprefix', userRoleId);
 
   await assignPermissionsToRole('User', adminRoleId);
+  await assignPermissionsToRole('RolesOnUsers', adminRoleId);
+  await assignPermissionsToRole('Course', adminRoleId);
+  await assignPermissionsToRole('Chapter', adminRoleId);
+  await assignPermissionsToRole('Role', adminRoleId);
+  await assignPermissionsToRole('Category', adminRoleId);
+  await assignPermissionsToRole('Attachment', adminRoleId);
+  await assignPermissionsToRole('Tracking', adminRoleId);
 
   await assignPermissionsToRole('User', userRoleId, true);
-  await createCategories(); // Call the new function to create categories
+  await assignPermissionsToRole('Course', userRoleId, true);
+  await assignPermissionsToRole('Chapter', userRoleId, true);
+  await assignPermissionsToRole('Tracking', userRoleId, true);
+  await assignPermissionsToRole('Attachment', userRoleId, true);
+
+  await createCategories();
 }
 
 main()

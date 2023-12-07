@@ -11,7 +11,6 @@ export default function Datatable() {
   const [data, setData] = useState<Payment[]>([]);
   const [categories, setCategories] = useState<any[]>([]); // any tipi kullanıldı, gerçek tipinize uygun bir tip kullanmalısınız
   const auth: any = useAuth();
-
   const getData = async () => {
     if (!auth?.token) return;
 
