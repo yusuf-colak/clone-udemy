@@ -30,6 +30,8 @@ export class CreateCourseDto {
   @IsOptional()
   categoryId?: string;
 
-  
+  @ApiProperty({ example: 'tenantId', description: 'tenantId' })
+  @IsNotEmpty()
+  tenantId!: string;
 
 }

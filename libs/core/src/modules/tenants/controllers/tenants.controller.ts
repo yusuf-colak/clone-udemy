@@ -110,4 +110,53 @@ export class TenantsController {
   async remove(@Param('id') id: string) {
     await this.TenantsService.remove(id);
   }
+
+  //-----------------------------
+  @ApiOperation({ summary: 'Fetch a specific tenant' })
+  @ApiResponse({ status: 200, description: 'Successful.', type: ReadTenantDto })
+  @ApiException(() => NotFoundException, {
+    description: 'The tenant was not found',
+  })
+  @checkAbilites({ action: 'read', subject: 'Tenant' })
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @Get(':id/course')
+  async findCoursesForTenant(@Param('id') id: string) {
+    const tenant = await this.TenantsService.findCoursesForTenant(id);
+    if (!tenant) {
+      throw new NotFoundException(`tenant with ID ${id} does not exist.`);
+    }
+    return tenant;
+  }
+
+  @ApiOperation({ summary: 'Fetch a specific tenant' })
+  @ApiResponse({ status: 200, description: 'Successful.', type: ReadTenantDto })
+  @ApiException(() => NotFoundException, {
+    description: 'The tenant was not found',
+  })
+  @checkAbilites({ action: 'read', subject: 'Tenant' })
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @Get(':id/user')
+  async findUserForTenant(@Param('id') id: string) {
+    const tenant = await this.TenantsService.findUserForTenant(id);
+    if (!tenant) {
+      throw new NotFoundException(`tenant with ID ${id} does not exist.`);
+    }
+    return tenant;
+  }
+
+  @ApiOperation({ summary: 'Fetch a specific tenant' })
+  @ApiResponse({ status: 200, description: 'Successful.', type: ReadTenantDto })
+  @ApiException(() => NotFoundException, {
+    description: 'The tenant was not found',
+  })
+  @checkAbilites({ action: 'read', subject: 'Tenant' })
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @Get(':id/ImageAndName')
+  async findImageAndNameTenant(@Param('id') id: string) {
+    const tenant = await this.TenantsService.findImageAndNameTenant(id);
+    if (!tenant) {
+      throw new NotFoundException(`tenant with ID ${id} does not exist.`);
+    }
+    return tenant;
+  }
 }

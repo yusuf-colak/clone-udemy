@@ -60,6 +60,11 @@ function generateUserPermissionsSorgu(subject: string) {
       action: 'manage',
       subject,
     },
+    {
+      id: randomUUID(),
+      action: 'read',
+      subject,
+    },
   ];
 }
 
@@ -101,9 +106,11 @@ export const permissions = [
   ...generateAdminPermissions('Attachment'),
   ...generateAdminPermissions('Tracking'),
   ...generateUserPermissionsSorgu('Course'),
+  ...generateUserPermissionsSorgu('Tenant'),
   ...generateUserPermissionsSorgu('Chapter'),
   ...generateUserPermissionsSorgu('Attachment'),
   ...generateUserPermissionsSorgu('Category'),
+
   ...generateUserPermissionsManageUpdate('Tracking'),
 ];
 
@@ -226,6 +233,7 @@ async function main() {
   await assignRoleToUser('user@microprefix', userRoleId);
 
   await assignPermissionsToRole('User', adminRoleId);
+  await assignPermissionsToRole('Tenant', adminRoleId);
   await assignPermissionsToRole('RolesOnUsers', adminRoleId);
   await assignPermissionsToRole('Course', adminRoleId);
   await assignPermissionsToRole('Chapter', adminRoleId);
@@ -234,6 +242,7 @@ async function main() {
   await assignPermissionsToRole('Attachment', adminRoleId);
   await assignPermissionsToRole('Tracking', adminRoleId);
 
+  await assignPermissionsToRole('Tenant', userRoleId, true);
   await assignPermissionsToRole('User', userRoleId, true);
   await assignPermissionsToRole('Course', userRoleId, true);
   await assignPermissionsToRole('Chapter', userRoleId, true);

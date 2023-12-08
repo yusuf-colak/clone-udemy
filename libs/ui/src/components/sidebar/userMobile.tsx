@@ -63,7 +63,7 @@ const UserMobile = ({ navbarToggle, controlText }: any) => {
               <SheetClose asChild className=" flex">
                 <DropdownMenuItem
                   onClick={() => {
-                    router.push('/panel');
+                    router.push('/');
                   }}
                 >
                   <SheetClose className=" flex">

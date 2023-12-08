@@ -30,7 +30,7 @@ const CoursesEditPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/courses`,
+          `${process.env.NEXT_PUBLIC_API_URL}/tenants/${auth?.user?.tenantId}/course`,
           {
             headers: {
               Authorization: `Bearer ${auth?.token}`,
@@ -78,10 +78,7 @@ const CoursesEditPage = () => {
           <Card className="max-w-[400px] min-w-[200px]">
             <CardHeader>
               <CardTitle className="flex justify-between items-center">
-                <Link
-                  className="hover:cursor-pointer"
-                  href={`/${course.id}`}
-                >
+                <Link className="hover:cursor-pointer" href={`/${course.id}`}>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -115,10 +112,7 @@ const CoursesEditPage = () => {
               <CardDescription></CardDescription>
             </CardHeader>
             <CardContent>
-              <Link
-                className="hover:cursor-pointer"
-                href={`/${course.id}`}
-              >
+              <Link className="hover:cursor-pointer" href={`/${course.id}`}>
                 {course.imageUrl ? (
                   <img
                     className="h-[300px] w-[300px] object-cover"

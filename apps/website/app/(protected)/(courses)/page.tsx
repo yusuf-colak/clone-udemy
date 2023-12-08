@@ -33,7 +33,7 @@ const CoursesPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/courses`,
+          `${process.env.NEXT_PUBLIC_API_URL}/tenants/${auth?.user?.tenantId}/course`,
           {
             headers: {
               Authorization: `Bearer ${auth?.token}`,

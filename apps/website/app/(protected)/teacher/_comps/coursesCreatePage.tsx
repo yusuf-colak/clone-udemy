@@ -46,6 +46,7 @@ const CreateCoursesPage = () => {
           title: values.title,
           userId: auth?.user.id,
           isPublished: false,
+          tenantId: auth?.user.tenantId,
         },
         {
           headers: {

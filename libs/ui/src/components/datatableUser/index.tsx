@@ -17,7 +17,7 @@ export default function Datatable() {
     try {
       // Kategorileri çek
       const responseUser = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/users/roleUser`,
+        `${process.env.NEXT_PUBLIC_API_URL}/tenants/${auth?.user?.tenantId}/user`,
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,

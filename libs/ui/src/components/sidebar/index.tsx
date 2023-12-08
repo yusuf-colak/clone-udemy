@@ -9,6 +9,7 @@ import {
   List,
   Plus,
   Newspaper,
+  Settings,
 } from 'lucide-react';
 import { useAuth } from 'apps/website/hooks/useAuth';
 import axios from 'axios';
@@ -19,7 +20,7 @@ export default function Sidebar() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/courses`,
+          `${process.env.NEXT_PUBLIC_API_URL}/tenants/${auth?.user?.tenantId}/course`,
           {
             headers: {
               Authorization: `Bearer ${auth?.token}`,
@@ -104,6 +105,11 @@ export default function Sidebar() {
       title: 'Benutzer',
       icon: Users,
       href: '/teacher/users',
+    },
+    {
+      title: 'Sidebar organisieren',
+      icon: Settings,
+      href: '/teacher/sideBarOrganize',
     },
   ];
   return (

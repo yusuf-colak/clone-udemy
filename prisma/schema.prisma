@@ -95,6 +95,7 @@ model RolesOnUsers {
 model Tenant {
   id   String @id @default(uuid())
   name String
+  image String? @db.Text
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt()
@@ -102,7 +103,7 @@ model Tenant {
 
   users   User[]
   domains Domain[]
-  //courses Course[]
+  course Course[]
 
   @@map("tenants")
 }
@@ -138,8 +139,8 @@ model Course {
   attachments Attachment[]
   tracking Tracking[]
 
-//tenantId String
- // tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id] , onDelete: Cascade)
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
