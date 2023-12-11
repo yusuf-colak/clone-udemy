@@ -91,7 +91,7 @@ const CreateCoursesPage = () => {
               </Button>
             </Link>
             <Button type="submit" disabled={!isValid || isSubmitting}>
-              Devam et
+              Weitermachen
             </Button>
           </div>
         </form>

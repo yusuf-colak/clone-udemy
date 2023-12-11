@@ -114,7 +114,7 @@ export default function Sidebar() {
   ];
   return (
     <React.Fragment>
-      <aside className="lg:flex sticky top-0 hidden h-screen">
+      <aside className="lg:flex sticky top-0 hidden h-screen bg-gray-200">
         <SidebarDesktop
           guestRoutes={guestRoutes}
           teacherRoutes={teacherRoutes}
@@ -122,7 +122,7 @@ export default function Sidebar() {
       </aside>
       <div
         className="lg:hidden flex flex-row justify-between 
-      items-center my-3 mx-2 bg-white"
+      items-center py-3 px-2 bg-gray-300/75"
       >
         <SidebarMobile
           guestRoutes={guestRoutes}

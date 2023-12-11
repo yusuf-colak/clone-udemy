@@ -1,9 +1,53 @@
+'use client';
 import React from 'react';
 import { Logout } from 'iconsax-react';
 import { ArrowRight } from 'iconsax-react';
 import { Button } from '@/libs/ui/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const HomePage: React.FC = () => {
+  const router = useRouter();
+  const nameRef = React.useRef<HTMLInputElement>(null);
+  const emailRef = React.useRef<HTMLInputElement>(null);
+  const passwordRef = React.useRef<HTMLInputElement>(null);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // Get current host as domain
+    const domain = window.location.host;
+    const name = nameRef.current?.value;
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          domain,
+          name,
+          email,
+          password,
+        }),
+      });
+
+      const { success } = await res.json();
+
+      if (success) {
+        const nextUrl = new URLSearchParams(window.location.search).get('next');
+        router.push(nextUrl ?? '/');
+        router.reload();
+      } else {
+        alert('Registration failed');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
+  };
+
   return (
     <>
       <div className={'bg-gray-50 h-screen w-full'}>
@@ -15,13 +59,17 @@ const HomePage: React.FC = () => {
                 size={24}
                 color="#4f46e5"
               />
-
-              <h2 className=" text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Kayıt ol!
               </h2>
             </div>
 
-            <form className="mt-8 space-y-6" action="#" method="POST">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 space-y-6"
+              action="#"
+              method="POST"
+            >
               <div>
                 <input
                   id="name"
@@ -30,6 +78,7 @@ const HomePage: React.FC = () => {
                   autoComplete="name"
                   required
                   placeholder="İsim"
+                  ref={nameRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -42,6 +91,7 @@ const HomePage: React.FC = () => {
                   autoComplete="email"
                   required
                   placeholder="Email Adresi"
+                  ref={emailRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -51,9 +101,10 @@ const HomePage: React.FC = () => {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="password"
+                  autoComplete="current-password"
                   required
                   placeholder="Şifre"
+                  ref={passwordRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
 
@@ -61,17 +112,16 @@ const HomePage: React.FC = () => {
                   <div className="relative flex items-start">
                     <div className="flex h-6 items-center">
                       <input
-                        id="candidates"
-                        aria-describedby="candidates-description"
-                        name="candidates"
+                        id="remember"
+                        name="remember"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                     </div>
                     <div className="ml-3 text-sm leading-6">
-                      <p id="candidates-description" className="text-gray-500">
+                      <label htmlFor="remember" className="text-gray-500">
                         Beni hatırla
-                      </p>
+                      </label>
                     </div>
                   </div>
                   <div className="text-sm">
@@ -87,7 +137,7 @@ const HomePage: React.FC = () => {
 
               <div className="mt-4">
                 <Button variant={'default'}>
-                  Kaydol <ArrowRight className=" w-auto" size={24} />
+                  Kaydol <ArrowRight className="w-auto" size={24} />
                 </Button>
               </div>
             </form>

@@ -76,9 +76,9 @@ export default function Login() {
               <Logout className="mx-auto h-10 w-auto text-accent" size={24} />
 
               <h2 className=" text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                Hoşgeldin!
+                Willkommen!
               </h2>
-              <p className={'text-gray-500'}>Giriş yap</p>
+              <p className={'text-gray-500'}>Anmeldung</p>
             </div>
 
             <form
@@ -94,7 +94,7 @@ export default function Login() {
                   type="text"
                   autoComplete="email"
                   required
-                  placeholder="Email Adresi"
+                  placeholder="E-Mail-Adresse"
                   ref={emailRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
@@ -107,7 +107,7 @@ export default function Login() {
                   type="password"
                   autoComplete="password"
                   required
-                  placeholder="Şifre"
+                  placeholder="Passwort"
                   ref={passwordRef}
                   className="block w-full border-b-2 p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                 />
@@ -125,7 +125,7 @@ export default function Login() {
                     </div>
                     <div className="ml-3 text-sm leading-6">
                       <p id="candidates-description" className="text-gray-500">
-                        Beni hatırla
+                        Erinnere dich an mich
                       </p>
                     </div>
                   </div>
@@ -134,7 +134,7 @@ export default function Login() {
                       href="#"
                       className="font-semibold text-primary hover:text-primary"
                     >
-                      Parolanızı mı unuttunuz?
+                      Passwort vergessen?
                     </a>
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export default function Login() {
 
               <div className="mt-4">
                 <Button>
-                  Giriş yap
+                Eingang Tun
                   <ArrowRight className="w-auto" size={24} />
                 </Button>
               </div>

@@ -16,12 +16,12 @@ export default function RootLayout({
   return (
     <body
       className={
-        'flex w-screen lg:flex-row flex-col min-h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100'
+        'flex w-screen lg:flex-row flex-col min-h-screen overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 '
       }
     >
       <Sidebar />
 
-      <main className="flex-1 w-full lg:px-6 lg:py-8 px-1 py-2 lg:border-l-2">
+      <main className="flex-1 w-full lg:px-6 lg:py-8  px-3 py-2 lg:border-l-2 bg-gray-100">
         {children}
       </main>
       <Toaster

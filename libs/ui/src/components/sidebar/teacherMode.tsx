@@ -20,15 +20,23 @@ const TeacherMode = () => {
         <React.Fragment>
           {isTeacherPage || isPlayerPage ? (
             <Link href="/" className="flex flex-row">
-              <Button className="w-full border" variant="ghost" size="sm">
-                <LogOut className="h-4 w-4 mr-2" />
+              <Button
+                className="w-full border  border-gray-300 p-2"
+                variant="ghost"
+                size="lg"
+              >
+                <LogOut className=" w-4 mr-2" />
                 {/* Öğretmen Modundan Çık */}
                 Administrationsmenü schließen
               </Button>
             </Link>
           ) : (
             <Link href="/teacher/coursesTable">
-              <Button className="w-full border" variant="ghost" size="sm">
+              <Button
+                className="w-full border border-gray-300 p-2"
+                variant="ghost"
+                size="lg"
+              >
                 {/* Öğretmen Paneli */}
                 Verwaltungsmenü
               </Button>
